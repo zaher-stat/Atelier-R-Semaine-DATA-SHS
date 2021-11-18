@@ -32,7 +32,7 @@ opts_knit$set(width=75)
 
 ```
 
-[![What is big data anyway ?](./img/semaine-data-shs_2021.png)
+[![Semaine Data-SHS](./img/semaine-data-shs_2021.png)
 
 # Préambule
 
