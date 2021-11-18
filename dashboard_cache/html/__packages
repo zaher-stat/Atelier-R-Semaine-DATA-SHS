@@ -1,0 +1,10 @@
+base
+knitr
+rmdformats
+pacman
+googlesheets4
+dplyr
+flexdashboard
+ggplot2
+ggmap
+sp

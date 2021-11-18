@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="generator" content="pandoc" />
+
+        <meta name="author" content="A. ZAHER" />
+    
+    
+    <title>Traiter facilement ses données de A à Z avec R :</title>
+
+        <script src="index_files/jquery-1.11.3/jquery.min.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link href="index_files/bootstrap-3.3.7/css/bootstrap.min.css" rel="stylesheet" />
+    <script src="index_files/bootstrap-3.3.7/js/bootstrap.min.js"></script>
+    <script src="index_files/jqueryui-1.11.4/jquery-ui.min.js"></script>
+    <script src="index_files/navigation-1.1/tabsets.js"></script>
+    <link href="index_files/magnific-popup-1.1.0/magnific-popup.css" rel="stylesheet" />
+    <script src="index_files/magnific-popup-1.1.0/jquery.magnific-popup.min.js"></script>
+    <link href="index_files/readthedown-0.1/readthedown.css" rel="stylesheet" />
+    <link href="index_files/readthedown-0.1/readthedown_fonts.css" rel="stylesheet" />
+    <script src="index_files/readthedown-0.1/readthedown.js"></script>
+        !-- Matomo -->
+    <script type="text/javascript">
+      var _paq = window._paq || [];
+      /* tracker methods like "setCustomDimension" should be called before "trackPageView" */
+      _paq.push(["setDocumentTitle", document.domain + "/" + document.title]);
+      _paq.push(["setCookieDomain", "*.datactivist.coop"]);
+      _paq.push(["setDomains", ["*.datactivist.coop"]]);
+      _paq.push(['trackPageView']);
+      _paq.push(['enableLinkTracking']);
+      (function() {
+        var u="//matomo.datactivist.coop/";
+        _paq.push(['setTrackerUrl', u+'matomo.php']);
+        _paq.push(['setSiteId', '1']);
+        var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
+        g.type='text/javascript'; g.async=true; g.defer=true; g.src=u+'matomo.js'; s.parentNode.insertBefore(g,s);
+      })();
+    </script>
+    <noscript><p><img src="//matomo.datactivist.coop/matomo.php?idsite=1&amp;rec=1" style="border:0;" alt="" /></p></noscript>
+    <!-- End Matomo Code -->
+    
+    
+    
+        <link rel="stylesheet" href="styles.css" type="text/css" />
+    
+    <!-- tabsets -->
+    <script>
+      $(document).ready(function () {
+	  window.buildTabsets("toc");
+      });
+      $(document).ready(function () {
+	  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+	      $(this).parent().toggleClass('nav-tabs-open')
+	  });
+      });
+    </script>
+
+    <!-- code folding -->
+    
+    <!-- code download -->
+    
+    <!-- tabsets dropdown -->
+
+    <style type="text/css">
+      .tabset-dropdown > .nav-tabs {
+	  display: inline-table;
+	  max-height: 500px;
+	  min-height: 44px;
+	  overflow-y: auto;
+	  background: white;
+	  border: 1px solid #ddd;
+	  border-radius: 4px;
+      }
+      
+      .tabset-dropdown > .nav-tabs > li.active:before {
+	  content: "";
+	  font-family: 'Glyphicons Halflings';
+	  display: inline-block;
+	  padding: 10px;
+	  border-right: 1px solid #ddd;
+      }
+      
+      .tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+	  content: "&#xe258;";
+	  border: none;
+      }
+      
+      .tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+	  content: "";
+	  font-family: 'Glyphicons Halflings';
+	  display: inline-block;
+	  padding: 10px;
+	  border-right: 1px solid #ddd;
+      }
+      
+      .tabset-dropdown > .nav-tabs > li.active {
+	  display: block;
+      }
+
+      .tabset-dropdown > .nav-tabs > li.active a {
+  	  padding: 0 15px !important;
+      }
+
+      .tabset-dropdown > .nav-tabs > li > a,
+      .tabset-dropdown > .nav-tabs > li > a:focus,
+      .tabset-dropdown > .nav-tabs > li > a:hover {
+	  border: none;
+	  display: inline-block;
+	  border-radius: 4px;
+	  background-color: transparent;
+      }
+      
+      .tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+	  display: block;
+	  float: none;
+      }
+      
+      .tabset-dropdown > .nav-tabs > li {
+	  display: none;
+	  margin-left: 0 !important;
+      }
+    </style>
+    
+</head>
+
+<body class="preload">
+
+            <!-- readthedown start -->   
+   <div id="content" data-toggle="wy-nav-shift">
+     <nav id="nav-top" role="navigation" aria-label="top navigation">
+       <a role="button" href="#" data-toggle="wy-nav-top"><span class="glyphicon glyphicon-menu-hamburger"></span></a>
+     </nav>
+         
+   
+        
+      <h1 class="title">Traiter facilement ses données de A à Z avec R :</h1>
+         <h1 class="subtitle">Semaine Data-SHS 2021 ~ PUD Grenoble</h1>
+   
+         <!-- readthedown authors -->
+   <div id="sidebar">
+    <h2><a href="#content">Traiter facilement ses données de A à Z avec R :</a></h2>
+    <div id="toc">
+      <ul>
+      <li><a href="#préambule"><span class="toc-section-number">1</span> Préambule</a></li>
+      <li><a href="#les-matériaux-nécessaires-pour-cette-formation"><span class="toc-section-number">2</span> Les matériaux nécessaires pour cette formation</a></li>
+      <li><a href="#les-étapes-de-la-formation"><span class="toc-section-number">3</span> Les étapes de la formation :</a><ul>
+      <li><a href="#première-démo"><span class="toc-section-number">3.1</span> Première démo :</a></li>
+      <li><a href="#les-données"><span class="toc-section-number">3.2</span> Les données</a></li>
+      <li><a href="#pourquoi-sintéresser-à-lanalyse-des-données"><span class="toc-section-number">3.3</span> Pourquoi s’intéresser à l’analyse des données ?</a></li>
+      </ul></li>
+      </ul>
+    </div>
+    <div id="postamble" data-toggle="wy-nav-shift" class="status">
+                  <p class="author"><span class="glyphicon glyphicon-user"></span> A. ZAHER</p>
+                        <p class="date"><span class="glyphicon glyphicon-calendar"></span> 6 et 7 Décembre 2021</p>
+          </div>
+   </div>
+   
+   
+      
+   
+<!-- Don't indent these lines or it will mess pre blocks indentation --> 
+<div id="main">
+<div id="préambule" class="section level1">
+<h1><span class="header-section-number">1</span> Préambule</h1>
+<p>Ce document présente un guide pratique pour l’atelier sur le traitement et l’analyse des données avec <strong>R</strong>, présenté lors de la semaine Data-SHS 2021 organisé par la <a href="https://www.msh-alpes.fr/plateformes/pud-ga">PUD Grenoble</a>.</p>
+<p>Elle accompagne les supports de formation suivants :</p>
+<ul>
+<li>les <a href="./jour1.html">slides de la première journée</a></li>
+<li>les <a href="./jour2.html">slides de la deuxième journée</a></li>
+<li>le <a href="https://github.com/datactivist/IntroR_ODF/blob/master/script.R">script R</a> reprenant les principales manipulations de données effectuées durant ces trois jours.</li>
+</ul>
+</div>
+<div id="les-matériaux-nécessaires-pour-cette-formation" class="section level1">
+<h1><span class="header-section-number">2</span> Les matériaux nécessaires pour cette formation</h1>
+<ul>
+<li>Une bonne connexion internet pour tous</li>
+<li>Un ordinateur par personne</li>
+<li>Toute la documentation de la formation : www.github.com/datactivist/introR_ODF</li>
+</ul>
+<p>Pour le formateur :</p>
+<ul>
+<li>préparer les démo</li>
+</ul>
+</div>
+<div id="les-étapes-de-la-formation" class="section level1">
+<h1><span class="header-section-number">3</span> Les étapes de la formation :</h1>
+<div id="première-démo" class="section level2">
+<h2><span class="header-section-number">3.1</span> Première démo :</h2>
+<p>Les participants renseignent le formulaire (<a href="https://forms.gle/dS3aX4jtHBMWvjjMA" class="uri">https://forms.gle/dS3aX4jtHBMWvjjMA</a>) qui demande des informations basiques sur les participants.
+Ce formulaire sert de démonstration des usages potentiels de R.</p>
+<p>Comment connecter un simple formulaire Google Form, ses données récoltées dans un tableur et les visualiser très simplement avec des petits modules de graphes ou de cartes sur une page HTML construite automatiquement.</p>
+<p>Le formateur a créé préalablement <a href="https://github.com/datactivist/IntroR_ODF/blob/master/dashboard.Rmd">un code R</a> qui permet de visualiser en temps réel <a href="./dashboard.html">un dashboard</a> qui présente les résultats.</p>
+<p>La force de R, c’est de permettre d’utiliser un code simple et concis (70 lignes dans ce cas). Il faut une heure à une heure et demi pour l’écrire.</p>
+</div>
+<div id="les-données" class="section level2">
+<h2><span class="header-section-number">3.2</span> Les données</h2>
+</div>
+<div id="pourquoi-sintéresser-à-lanalyse-des-données" class="section level2">
+<h2><span class="header-section-number">3.3</span> Pourquoi s’intéresser à l’analyse des données ?</h2>
+<p>La maîtrise de l’information est un élément essentiel du rapport au pouvoir (empowerment, donnée de capacités d’action)</p>
+<ul>
+<li>Professionnellement</li>
+<li>Personnellement, mouvement du <a href="http://mesinfos.fing.org/">self data</a> : données pour reprise en main de certaines parties de sa vie.</li>
+</ul>
+<p><a href="http://mesinfos.fing.org/selfdata/"><img src="img/image_domaine_usages.png" /></a></p>
+<ul>
+<li>Littératie de donnée</li>
+<li>En tant que citoyen, déconstruire les algorithmes et se réapproprier les données qui servent à la décision publique</li>
+</ul>
+<p>Les données ne signifient rien à l’état brut. C’est un modèle qui permet de les interpréter : on fait des hypothèses sur le rapport des données avec la réalité et on donne du sens aux données pour confirmer/infirmer ce modèle.</p>
+<div class="figure">
+<img src="http://i.giphy.com/J14dxhoJLWlI4.gif" alt="fatal experience - http://gph.is/29hJuIt" />
+<p class="caption">fatal experience - <a href="http://gph.is/29hJuIt" class="uri">http://gph.is/29hJuIt</a></p>
+</div>
+<div id="accéder-à-la-deuxième-partie-de-cette-formation-utiliser-r-pour-lanalyse-et-la-visualisation-de-données" class="section level3">
+<h3><span class="header-section-number">3.3.1</span> Accéder à la deuxième partie de cette formation, <a href="./index2.html">“Utiliser R pour l’analyse et la visualisation de données”</a></h3>
+</div>
+</div>
+</div>
+</div>
+
+   
+   
+            
+      
+
+  <script>
+    $(document).ready(function () {
+
+			
+ 		
+		$('#content img').addClass("image-lb");
+	$('#content').magnificPopup({
+	    type:'image',
+	    closeOnContentClick: false,
+	    closeBtnInside: false,
+	    delegate: 'img',
+	    gallery: {enabled: false },
+	    image: {
+	        verticalFit: true,
+		titleSrc: 'alt'
+	    }
+ 	});
+ 	    });
+  </script>
+
+
+
+    <!-- dynamically load mathjax for compatibility with self-contained -->
+  <script>
+    (function () {
+	var script = document.createElement("script");
+	script.type = "text/javascript";
+	script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+	document.getElementsByTagName("head")[0].appendChild(script);
+    })();
+  </script>
+  
+</body>
+</html>
