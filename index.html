@@ -144,11 +144,9 @@
     <div id="toc">
       <ul>
       <li><a href="#préambule"><span class="toc-section-number">1</span> Préambule</a></li>
-      <li><a href="#les-matériaux-nécessaires-pour-cette-formation"><span class="toc-section-number">2</span> Les matériaux nécessaires pour cette formation</a></li>
+      <li><a href="#pré-requis-de-la-formation"><span class="toc-section-number">2</span> Pré-requis de la formation</a></li>
       <li><a href="#les-étapes-de-la-formation"><span class="toc-section-number">3</span> Les étapes de la formation :</a><ul>
       <li><a href="#première-démo"><span class="toc-section-number">3.1</span> Première démo :</a></li>
-      <li><a href="#les-données"><span class="toc-section-number">3.2</span> Les données</a></li>
-      <li><a href="#pourquoi-sintéresser-à-lanalyse-des-données"><span class="toc-section-number">3.3</span> Pourquoi s’intéresser à l’analyse des données ?</a></li>
       </ul></li>
       </ul>
     </div>
@@ -163,9 +161,10 @@
    
 <!-- Don't indent these lines or it will mess pre blocks indentation --> 
 <div id="main">
+<p>[<img src="img/semaine-data-shs_2021.png" alt="What is big data anyway ?" /></p>
 <div id="préambule" class="section level1">
 <h1><span class="header-section-number">1</span> Préambule</h1>
-<p>Ce document présente un guide pratique pour l’atelier sur le traitement et l’analyse des données avec <strong>R</strong>, présenté lors de la semaine Data-SHS 2021 organisé par la <a href="https://www.msh-alpes.fr/plateformes/pud-ga">PUD Grenoble</a>.</p>
+<p>Ce document présente un guide pratique pour l’atelier sur le traitement et l’analyse des données avec <strong>R</strong>, présenté lors de la semaine Data-SHS 2021 organisée par la <a href="https://www.msh-alpes.fr/plateformes/pud-ga">PUD Grenoble</a>.</p>
 <p>Elle accompagne les supports de formation suivants :</p>
 <ul>
 <li>les <a href="./jour1.html">slides de la première journée</a></li>
@@ -173,51 +172,38 @@
 <li>le <a href="https://github.com/datactivist/IntroR_ODF/blob/master/script.R">script R</a> reprenant les principales manipulations de données effectuées durant ces trois jours.</li>
 </ul>
 </div>
-<div id="les-matériaux-nécessaires-pour-cette-formation" class="section level1">
-<h1><span class="header-section-number">2</span> Les matériaux nécessaires pour cette formation</h1>
+<div id="pré-requis-de-la-formation" class="section level1">
+<h1><span class="header-section-number">2</span> Pré-requis de la formation</h1>
 <ul>
-<li>Une bonne connexion internet pour tous</li>
-<li>Un ordinateur par personne</li>
-<li>Toute la documentation de la formation : www.github.com/datactivist/introR_ODF</li>
-</ul>
-<p>Pour le formateur :</p>
+<li><p><a href="https://cloud.r-project.org/">Installation de R</a></p>
 <ul>
-<li>préparer les démo</li>
+<li>Sous windows télécharger <a href="https://cran.r-project.org/bin/windows/Rtools/">R Tools</a></li>
+<li>Sous MacOS X il faut probablement <a href="https://github.com/kennethreitz/osx-gcc-installer">installer les “command line tools” ou un compilateur gcc</a> (pour pouvoir compiler des packages lorsque nécessaire)</li>
+</ul></li>
+<li><p>Installer ensuite <a href="https://www.rstudio.com/products/rstudio/download/preview/">Rstudio</a></p></li>
+<li><p>Installer le package <code>tidyverse</code></p>
+<ul>
+<li>Pour installer le tidyverse, entrez dans la console : <code>install.packages("tidyverse")</code> puis appuyer sur entrée.
+<ul>
+<li>Si un warning s’affiche en précisant que le package n’est pas sous forme binaire, spécifier l’argument <code>type="source"</code> dans l’appel à la fonction <code>install.packages()</code></li>
+<li>Au passage, on voit que RStudio apporte une couche d’assistance en proposant les arguments de la fonction <code>install.packages</code></li>
+<li>Si le bouton “Stop” (en haut à droite de la console de Rstudio) est affiché et que le symbole « &gt; » (invite de commande) n’est pas affiché, cela signifie que R continue de travailler.</li>
+</ul></li>
+<li>Quand c’est terminé on a le texte :<br />
+_The downloaded binary packages are in "C:_user<em>packages"</em> (ou équivalent)</li>
+<li>L’invite de commande est revenue : c’est ce symbole en début de ligne : « &gt; »</li>
+<li>Il est également possible d’installer des packages individuellement via Rstudio (bouton Install à droite de l’IHM). Logique de R : tout peut être fait en lignes de commande.</li>
+</ul></li>
 </ul>
 </div>
 <div id="les-étapes-de-la-formation" class="section level1">
 <h1><span class="header-section-number">3</span> Les étapes de la formation :</h1>
 <div id="première-démo" class="section level2">
 <h2><span class="header-section-number">3.1</span> Première démo :</h2>
-<p>Les participants renseignent le formulaire (<a href="https://forms.gle/dS3aX4jtHBMWvjjMA" class="uri">https://forms.gle/dS3aX4jtHBMWvjjMA</a>) qui demande des informations basiques sur les participants.
-Ce formulaire sert de démonstration des usages potentiels de R.</p>
-<p>Comment connecter un simple formulaire Google Form, ses données récoltées dans un tableur et les visualiser très simplement avec des petits modules de graphes ou de cartes sur une page HTML construite automatiquement.</p>
-<p>Le formateur a créé préalablement <a href="https://github.com/datactivist/IntroR_ODF/blob/master/dashboard.Rmd">un code R</a> qui permet de visualiser en temps réel <a href="./dashboard.html">un dashboard</a> qui présente les résultats.</p>
-<p>La force de R, c’est de permettre d’utiliser un code simple et concis (70 lignes dans ce cas). Il faut une heure à une heure et demi pour l’écrire.</p>
-</div>
-<div id="les-données" class="section level2">
-<h2><span class="header-section-number">3.2</span> Les données</h2>
-</div>
-<div id="pourquoi-sintéresser-à-lanalyse-des-données" class="section level2">
-<h2><span class="header-section-number">3.3</span> Pourquoi s’intéresser à l’analyse des données ?</h2>
-<p>La maîtrise de l’information est un élément essentiel du rapport au pouvoir (empowerment, donnée de capacités d’action)</p>
-<ul>
-<li>Professionnellement</li>
-<li>Personnellement, mouvement du <a href="http://mesinfos.fing.org/">self data</a> : données pour reprise en main de certaines parties de sa vie.</li>
-</ul>
-<p><a href="http://mesinfos.fing.org/selfdata/"><img src="img/image_domaine_usages.png" /></a></p>
-<ul>
-<li>Littératie de donnée</li>
-<li>En tant que citoyen, déconstruire les algorithmes et se réapproprier les données qui servent à la décision publique</li>
-</ul>
-<p>Les données ne signifient rien à l’état brut. C’est un modèle qui permet de les interpréter : on fait des hypothèses sur le rapport des données avec la réalité et on donne du sens aux données pour confirmer/infirmer ce modèle.</p>
-<div class="figure">
-<img src="http://i.giphy.com/J14dxhoJLWlI4.gif" alt="fatal experience - http://gph.is/29hJuIt" />
-<p class="caption">fatal experience - <a href="http://gph.is/29hJuIt" class="uri">http://gph.is/29hJuIt</a></p>
-</div>
-<div id="accéder-à-la-deuxième-partie-de-cette-formation-utiliser-r-pour-lanalyse-et-la-visualisation-de-données" class="section level3">
-<h3><span class="header-section-number">3.3.1</span> Accéder à la deuxième partie de cette formation, <a href="./index2.html">“Utiliser R pour l’analyse et la visualisation de données”</a></h3>
-</div>
+<p>L’objectif de cette démonstration est d’illustrer l’une des des usages potentiels de R.</p>
+<p>Pour cela, veuillez renseigner svp le formulaire suivant qui demande des informations basiques sur les participants : <a href="https://forms.gle/dS3aX4jtHBMWvjjMA" class="uri">https://forms.gle/dS3aX4jtHBMWvjjMA</a> (<strong>5 min</strong>).</p>
+<p>On s’intéresse après à connecter ce formulaire simple de <strong>Google Form</strong>, ç-à-d récupérer ses données récoltées dans un tableur <strong>Excel</strong> et les visualiser très simplement avec des petits modules de graphes ou cartes sur une page HTML construite automatiquement (<strong>RMarkdown</strong>).</p>
+<p>Il s’agit donc de créer <a href="https://github.com/zaher-stat/Atelier-R-Semaine-DATA-SHS/blob/ZAHER_Ahmed/dashboard.Rmd">un code R</a> qui permet de visualiser en temps réel <a href="./dashboard.html">un dashboard</a> qui présente les résultats.</p>
 </div>
 </div>
 </div>
