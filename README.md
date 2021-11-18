@@ -1,1 +1,1 @@
-# Atelier-R-Semaine-DATA-SHS
+# Atelier R / Semaine DATA-SHS
