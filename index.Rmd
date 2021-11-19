@@ -32,7 +32,7 @@ opts_knit$set(width=75)
 
 ```
 
-[![Semaine Data-SHS](./img/semaine-data-shs_2021.png)
+![](./img/semaine-data-shs_2021.png)
 
 # Préambule
 
@@ -74,5 +74,25 @@ Pour cela, veuillez renseigner svp le formulaire suivant qui demande des informa
 On s'intéresse après à connecter ce formulaire simple de __Google Form__, ç-à-d récupérer ses données récoltées dans un tableur __Excel__ et les visualiser très simplement avec des petits modules de graphes ou cartes sur une page HTML construite automatiquement (__RMarkdown__).  
 
 Il s'agit donc de créer [un code R](https://github.com/zaher-stat/Atelier-R-Semaine-DATA-SHS/blob/ZAHER_Ahmed/dashboard.Rmd) qui permet de visualiser en temps réel [un dashboard](./dashboard.html) qui présente les résultats. 
+
+## 1ère partie : Présentation de R
+
+- Pourquoi utiliser R du début à la fin du traitement de données ?
+- Le concept du package `tidyverse`
+- Prendre R en main
+
+## 2ème partie : le RMarkdown
+
+- Diffuser et publier avec RMarkdown : Comment créer un nouveau document ?
+- Eléments d'un document RMarkdown
+- https://juba.github.io/tidyverse/13-rmarkdown.html
+
+## 3ème partie : Présentation de la démarche global de l'analyse : explorer, manipuler, tracer et modéliser
+
+- Présentation du jeu de données à utiliser
+- Visualiser ses données (graphiques)
+- Transformer ses tableaux, faire des opérations groupées (moyennes, sommes, écart-type)
+- Faire des tests statistiques groupés et sortir les résultats et les indicateurs dans des tableaux
+
 
 

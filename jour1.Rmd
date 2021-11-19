@@ -1,6 +1,6 @@
 ---
 title: "Introduction à R"
-author: Open Data France et datactivi.st
+author: A. Zaher
 ratio: 16x10
 output:
   rmdshower::shower_presentation:
@@ -10,7 +10,7 @@ output:
     incremental: true
 ---
 
-## Introduction à R, le couteau suisse de la data science 
+## Pourquoi utiliser R du début à la fin du traitement de données ? 
 
 
 <p></p>
