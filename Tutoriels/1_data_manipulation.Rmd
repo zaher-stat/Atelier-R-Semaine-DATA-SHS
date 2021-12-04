@@ -1,0 +1,173 @@
+---
+title: "Importation et manipulation des données"
+author: "A. ZAHER"
+date: "6 décembre 2021"
+output:
+  rmdformats::readthedown:
+    self_contained: true
+    highlight: kate
+    number_sections: yes
+  html_document:
+    number_sections: yes
+    theme: flatly
+    toc: yes
+    toc_float: yes
+    
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r load packages, message=FALSE, warning=FALSE}
+library(tidyverse)
+library(readr)
+```
+
+
+# Importation de données
+
+```{r , message=FALSE, warning=FALSE}
+
+intensite_depressif <- read_csv2("Data/Intensité_symptômes_dépressif.csv")
+intensite_depressif
+
+```
+
+
+# Manipulation des données
+
+## Description de la BD
+
+**Structure de la BD :**
+
+```{r , message=FALSE, warning=FALSE}
+
+str(intensite_depressif)
+
+```
+
+**Accéder aux variables de la BD :**
+
+```{r , message=FALSE, warning=FALSE}
+
+intensite_depressif$Classe_âge[1:50] ## les 50 premières valeurs
+
+```
+
+
+**Tri à plat pour les variables qualitative de BD :**
+
+```{r , message=FALSE, warning=FALSE}
+
+table(intensite_depressif$Pays)
+table(intensite_depressif$Classe_âge)
+table(intensite_depressif$Sexe)
+table(intensite_depressif$Quintile_revenu)
+table(intensite_depressif$Classe_intensité)
+```
+
+
+## Manipulation avec `dplyr`
+
+**Sélectionner les données de la France dans la BD :**
+
+```{r , message=FALSE, warning=FALSE}
+
+intensite_depressif_Fr <- intensite_depressif %>% filter(Pays == "France")
+intensite_depressif_Fr
+
+```
+
+**Sélectionner les données de la France pour la classe d’âge de 25 à 34 ans :**
+
+```{r , message=FALSE, warning=FALSE}
+
+intensite_depressif_Fr_34 <- intensite_depressif %>% filter(Pays == "France" & Classe_âge == "De 25 à 34 ans")
+intensite_depressif_Fr_34
+
+```
+
+
+## Enchaîner les opérations avec `%>%`
+
+**Extraire les données de la France pour la classe d’âge de 25 à 34 ans avec `filter`, sélectionner les colonnes “Classe_âge” et “Pourcentage” avec `select` puis trier selon la variable “Pourcentage” avec `arrange` :**
+
+
+```{r , message=FALSE, warning=FALSE}
+
+intensite_depressif %>% 
+  filter(Pays == "France" & Classe_âge == "De 25 à 34 ans") %>% 
+  select(Classe_âge, Pourcentage) %>% 
+  arrange(Pourcentage)
+
+```
+
+## Opérations groupées
+
+**Calculer le pourcentage moyen par classe d’intensité :**
+
+```{r , message=FALSE, warning=FALSE}
+
+intensite_depressif_Fr %>% 
+  group_by(Classe_intensité) %>%
+  summarise(Moyenne = mean(Pourcentage))
+
+```
+
+**Calculer le pourcentage moyen par classe d’intensité et par classe d'âge :**
+
+```{r , message=FALSE, warning=FALSE}
+
+intensite_depressif_Fr %>%
+  group_by(Classe_intensité, Classe_âge) %>%
+  summarise(Moyenne = mean(Pourcentage))
+
+```
+
+
+# Visualisation avec `ggplot2`
+
+**Histogramme de pourcentage :**
+
+```{r , message=FALSE, warning=FALSE}
+
+ggplot(data = intensite_depressif_Fr) + geom_histogram(aes(x = Pourcentage))
+
+```
+
+**Diagramme en bâton pour le pourcentage de chaque classe d’intensité chez les femmes âgée de 45 à 54 ans dans le 5ème quintile de revenu**
+
+```{r , message=FALSE, warning=FALSE}
+
+## Préparation des données 
+data_plot <- intensite_depressif_Fr %>% filter(Classe_âge == "De 45 à 54 ans" & Sexe == "F" & Quintile_revenu == "5eme_quintile")
+
+## Plot
+ggplot(data = data_plot) + geom_bar(aes(x = Classe_intensité, y = Pourcentage), stat = "identity")
+
+```
+
+**Représenter des boîtes à moustaches pour les classes d’âges chez la population représentant des intensités sévères**
+
+```{r , message=FALSE, warning=FALSE}
+
+## Préparation des données 
+data_plot <- intensite_depressif_Fr %>% filter(Classe_intensité == "Grave")
+
+## Plot
+ggplot(data = data_plot) + geom_boxplot(aes(x = Classe_âge, y = Pourcentage), fill = "steelblue")
+
+```
+
+**Faceting : Reprendre le même graph selon le grnre**
+
+
+```{r , message=FALSE, warning=FALSE}
+
+ggplot(data = data_plot) +
+  geom_boxplot(aes(x = Classe_âge, y = Pourcentage)) +
+  facet_wrap(vars(Sexe))
+
+```
+

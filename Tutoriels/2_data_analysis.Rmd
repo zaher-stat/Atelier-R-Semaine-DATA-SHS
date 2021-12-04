@@ -1,0 +1,481 @@
+---
+title: "Analyse statistique des données avec R"
+author: "A. ZAHER"
+date: "7 décembre 2021"
+output:
+  rmdformats::readthedown:
+    self_contained: true
+    highlight: kate
+    number_sections: yes
+  html_document:
+    number_sections: yes
+    theme: flatly
+    toc: yes
+    toc_float: yes
+    
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+
+
+# Présentation et manipulation des données
+
+Dans ce tutoriel, on va travailler avec le jeu de données tiré de l'enquête __General Social Survey (GSS)__ sur le bonheur inclus dans l'extension `questionr`.
+
+_GSS est une enquête annuelle transversale sur les Américains, menée depuis 
+
+## Chargement de données
+
+On commence donc par charger l'extension `questionr` et le jeu de données par la suite :
+
+```{r load packages, message=FALSE, warning=FALSE}
+library(tidyverse)
+#install.package("questionr")
+library(questionr)
+
+data(happy) #pour charger le jeu de données
+
+d <- happy #pour renommer le jeu de données 
+
+```
+
+Pour comprendre la structure du notre base de données, on peut utiliser la fonction `str()` :
+
+```{r data_manip, message=FALSE, warning=FALSE}
+str(d)
+```
+
+Le jeu de données est composé de *51 020* observations et *10* variables, qui sont décrites comme suit :
+
+- **happy** : niveau du bonheur (_very happy, pretty happy, not too happy_).
+
+- **year** : année de l'enquête.
+
+- **age** : âge en années.
+
+- **sexe** : sexe (_female, male_).
+
+- **marital** : état civil (_married, never married, divorced, widowed, separated_).
+
+- **degree** : niveau d'éducation (_lt high school, high school, junior college, bachelor, graduate_).
+
+- **finrela** : situation financière relative (__far above, above average, average, below average, far below_).
+
+- **health** : niveau de santé (_excellent, good, fair, poor_)
+
+- **wtssall** : poids de probabilité.
+
+
+## Renommer les colonnes :
+
+On peut renommer les colonnes de la base de données en utilisant la fonction `rename()` de `dplyr`
+
+```{r rename_cols, message=FALSE, warning=FALSE}
+d <-rename(d,
+           niv_bonheur = happy,
+           etat_matrimonial = marital,
+           niv_education = degree,
+           sit_financiere = finrela,
+           niv_sante = health,
+           sexe = sex,
+           poids_prob = wtssall)
+
+colnames(d)
+```
+
+## Ajouter une colonne :
+
+On veut ajouter une colonne nommée "niv_bonheur_fr", qui reprend les même facteurs de la variable "niv_bonheur" mais qui sont traduits en français cette fois (_Ex. "très heureux" à la place de "very happy"_). Pour ce faire, on va utiliser la fonction mutate() pour ajouter la colonne et la fonction `fct_recode()` du package `forecats` qui permet de manipuler les niveaux d'une variable factorielle :
+
+```{r change_val, message=FALSE, warning=FALSE}
+#install.packages("forcats")
+library(forcats)
+#help(fct_recode)
+d <- d %>% mutate(niv_bonheur_fr = fct_recode(niv_bonheur,
+                                              "très heureux" = "very happy",
+                                              "assez heureux" = "pretty happy",
+                                              "pas trop heureux" = "not too happy"))
+
+tab <- table(d$niv_bonheur_fr) ## Tri à plat pour vérifier les nouveaux facteurs
+
+library(kableExtra)
+kable(tab) ## pour une meilleure visualisation
+
+```
+
+Une méthode alternative en utilisant la fonction `ifelse()` :
+
+```
+help(ifelse)
+d$niv_bonheur_fr <- NA ## pour créer une nouvelle colonne
+d$niv_bonheur_fr <- ifelse(d$niv_bonheur == "very happy", "très heureux", 
+                        ifelse(d$niv_bonheur == "pretty happy", "assez heureux",
+                               ifelse(d$niv_bonheur == "not too happy", "pas trop heureux", d$niv_bonheur_fr
+                                      )))
+
+```
+**Exercices :**
+
+- Faites de même pour la variable "etat_matrimonial";
+
+- Sélectionner les personnes "très heureux", qui sont mariées (_married_) et ayant une situation financière largement au-dessus de la moyenne (_"far above"_)
+
+
+## Sélectionner des observations
+
+On cherche ici à sélectionner un sous-échantillon de **3 500** sujets parmi les **51 000** qui sont présents dans la base de données.
+
+Pour ce faire, on applique la fonction `sample_n()` du package `dplyr` qui permet de tirer aléatoirement des lignes de la base de données, sans remplacement (`replace = FALSE`) :
+
+```{r sample, message=FALSE, warning=FALSE}
+
+set.seed(123)
+d <- sample_n(d, size = 6000, replace = FALSE)
+
+dim(d) ## pour afficher la dimension de la bd
+```
+
+la fonction `set.seed(1234)` assure des résultats reproductibles, on aura le même échantillon aléatoire même si on applique la fonction sample_n() plusieures fois.
+
+# Analyse descriptive :
+
+## Variables quantitatives :
+
+La fonction `describe()` du package `psych` permet de fournir des statistiques descriptives sur les variables quantitatives :
+
+```{r stat_desc, message=FALSE, warning=FALSE}
+
+library(psych)
+tab <- psych::describe(d[, c("age", "poids_prob")])
+kable(tab)
+
+```
+
+## Variables qualitatives :
+
+### Tri à plat
+
+Pour représenter la répartition des valeurs d'une variable qualitative, on peut utiliser la fonction `freq()` du package `questionr` :
+
+```{r stat_desc2, message=FALSE, warning=FALSE}
+
+library(questionr)
+freq(d$niv_bonheur)
+freq(d$etat_matrimonial)
+# freq(d$niv_education)
+# freq(d$niv_sante)
+# freq(d$sit_financiere)
+# freq(d$sexe)
+
+```
+
+On peut éviter les appels multiples de la même fonction grâce à la fonction `lapply()`, qui permet d'appliquer une fonction de façon itérative 
+
+```{r freq, message=FALSE, warning=FALSE}
+
+vars_qual <- c("niv_bonheur", "etat_matrimonial", "niv_education", "niv_sante", "sit_financiere", "sexe") ## pour sélectionner les vars qualitatives de la BD
+
+tab <- lapply(d[, vars_qual], freq)
+kable(tab)
+
+```
+
+### Croisement des variables qualitatives
+
+Pour faire un tableau croisé entre deux variables qualitatives, on utilise comme pour un tri à plat la fonction `table()` mais à laquelle on passe cette fois deux variables en argument.
+
+Par exemple, si on veut croiser le niveau du bonheur avec le sexe des enquêtés :
+
+```{r stat_desc3, message=FALSE, warning=FALSE}
+
+tab_sexe <- table(d$niv_bonheur, d$sexe)
+kable(tab_sexe)
+
+```
+
+Pour avoir un tableau en pourcentage, on peut utiliser les deux fonctions `lprop` (pour les pourcentages ligne) et `cprop` (pour les pourcentages colonne) :
+
+```{r stat_desc4, message=FALSE, warning=FALSE}
+
+tab_sexe <- table(d$niv_bonheur, d$sexe)
+tab1 <- lprop(tab_sexe)
+kable(tab1)
+tab2 <- cprop(tab_sexe)
+kable(tab2)
+
+```
+
+- **Croisement "niv_bonheur" et "etat_matrimonial" :**
+
+```{r stat_desc5, message=FALSE, warning=FALSE}
+
+tab_EM <- table(d$niv_bonheur, d$etat_matrimonial)
+kable(cprop(tab_EM))
+
+```
+
+
+- **Croisement "niv_bonheur" et "etat_matrimonial" :**
+
+```{r stat_desc6, message=FALSE, warning=FALSE}
+
+tab_edu <- table(d$niv_bonheur, d$niv_education)
+kable(cprop(tab_edu))
+
+```
+
+- **Croisement "niv_bonheur" et "sit_financiere" :**
+
+```{r stat_desc7, message=FALSE, warning=FALSE}
+
+tab_SF <- table(d$niv_bonheur, d$sit_financiere)
+kable(cprop(tab_SF))
+
+```
+
+- **Croisement "niv_bonheur" et "niv_sante" :**
+
+```{r stat_desc8 , message=FALSE, warning=FALSE}
+
+tab_Sante <- table(d$niv_bonheur, d$niv_sante)
+kable(cprop(tab_Sante))
+
+```
+
+
+### Test d'indépendance du $\chi^2$
+
+On peut compléter les tableaux croisés par un test d'indépendance du $\chi^2$, qui permet de tester l'hypothèse d'indépendance entre deux variables catégorielles.
+
+Pour effectuer un test de ce type, on applique la fonction `chisq.test()` au tableu croisé calculé précédemment :
+
+```{r chisq , message=FALSE, warning=FALSE}
+
+chisq.test(tab_sexe)
+chisq.test(tab_EM)
+chisq.test(tab_edu)
+chisq.test(tab_SF)
+chisq.test(tab_Sante)
+
+```
+
+Le résultat du test, sur chaque tableau croisé, nous indique trois valeurs :
+
+- `X-square` : la valeur de la statistique du $\chi^2$.
+- `df` : le nombre de degrés de libertés du test.
+- `p` : le fameux p-value, qui indique la probabilité d'obtenir une valeur de la statistique du $\chi^2$ au moins aussi extrême sous l'hypothèse d'indépendance.
+
+Ici, tous les p-values, à l'exception de celle du 1er test, sont extrêment petits et donc on rejette l'hypothèse d'indépendance entre au seuil de 5%. 
+Le premier test indique que le niveau du bonheur est indépendant du genre. 
+
+### Représentation graphique
+
+Il est possible de faire une représentation graphique d'un tableau croisé, par exemple avec la fonction `mosaicplot()` :
+
+```{r mosa_plot , message=FALSE, warning=FALSE}
+
+mosaicplot(tab_EM)
+
+```
+
+On peut améliorer ce graphique en colorant les cases selon les résidus du test du $\chi^2$ (argument `shade = TRUE`) :
+
+```{r mosa_plot2 , message=FALSE, warning=FALSE}
+
+mosaicplot(tab_EM, shade = TRUE)
+
+```
+
+## Croisement d'une variable quantitative et d'une variable qualitative
+
+### Représentation graphique
+
+Pour analyser la répartition de l'âge selon la catégorie d'appartenance de la variable qualitative "niv_bonheur", on peut commencer par une représentation graphique de type "boîte à moustache" à l'aide de la fonction `boxplot()` :
+
+```{r quant_plot , message=FALSE, warning=FALSE}
+
+boxplot(d$age ~ d$niv_bonheur)
+
+```
+
+
+## Calcul d'indicateurs
+
+Pour calculer l'âge moyen par niveau du bonheur, on peut travailler avec les "verbs" de `dplyr` : 
+
+```{r calcul, message=FALSE, warning=FALSE}
+
+d %>% 
+  group_by(niv_bonheur) %>% 
+  summarise(Moyenne = mean(age, na.rm = TRUE))
+  
+```
+
+
+On peut également ajouter les écart-types :
+
+```{r calcul2, message=FALSE, warning=FALSE}
+
+tab_ind <- d %>% 
+  group_by(niv_bonheur) %>% 
+  summarise(Moyenne = mean(age, na.rm = TRUE),
+            ET = sd(age, na.rm = TRUE))
+
+kable(tab_ind)
+```
+
+
+## Tests statistiques
+
+Pour comparer les moyennes des âges par sexe, on peut utiliser le test *t du Student*.
+
+Un test *t* s'effectue à l'aide de la fonction `t.test()`. Ainsi, on peut tester l'hypthèse d'égalité des âges moyens selon le sexe :
+
+```{r test_stat, message=FALSE, warning=FALSE}
+
+t.test(d$age ~ d$sexe)
+```
+
+
+Le résultat du test n'est pas significatif, on ne rejette pas l'hypothèse nulle d'égalité des moyennes des âges entre les hommes et les femmes.
+
+==> Le test *t* s'applique à des distributions normales. On doit donc vérifier avant si la distribution des âges est normale !!
+
+On peut se faire un premier aperçu visuel pour vérifier la normalité de la distribution de l'âge dans les deux groupes
+
+```{r hist, message=FALSE, warning=FALSE}
+
+hist(d$age[which(d$sexe == "male")])
+hist(d$age[which(d$sexe == "female")])
+
+```
+
+Les deux distributions ne semblent pas proches d'une distribution normale.
+
+On peut également tester cette normalité en faisant appel au test de _Shapiro-Wilk_, par la fonction `shapiro.test` :
+
+
+```{r norm_test, message=FALSE, warning=FALSE}
+
+shapiro.test(d$age[which(d$sexe == "male")])
+shapiro.test(d$age[which(d$sexe == "female")])
+
+```
+
+Le test est significatif dans les deux cas, et l'hypothèse de normalité est rejetée par la suite.
+
+Dans ce cas, on peut travailler par un test non-paramétrique (qui ne fait pas d'hypothèses sur les lois de distribution) pour comparer les deux groupes, en l'occurrence le test des rangs de _Wilcoxon_, à l'aide de la fonction `wilcox.test()` :
+
+```{r wilcox_test, message=FALSE, warning=FALSE}
+
+wilcox.test(d$age ~ d$sexe)
+
+```
+
+la p-value est à nouveau supérieur au seuil de 5%, on ne rejette pas l'hypothèse d'égalité des moyennes d'âges entre les hommes et les femmes.
+
+
+
+**Exercices :**
+
+- Faire le boxplot qui croise l'âge avec le niveau de santé, et calculer l'âge moyen par catégorie de `niv_sante`.
+- 
+-
+
+
+# Modélisation
+
+## Régression logistique ordinale
+
+Dans cette partie, on cherche à déterminer les facteurs qui influencent le niveau de bonheur chez les enquêtés. Ce qui revient donc à prédir le niveau du bonheur en fonction du genre, de l'âge, de l'état matrimonial, de la situation financière et du niveau de santé.
+
+Puisque notre variable d'intérêt (variable dépendante : `niv_bonheur`) est nominale ordonnée (il existe un ordre explicite dans les catégories), la régression logistique à probabilités proportionnelles (__Proportional Odds Logistic Regression__) est la plus adaptée dans ce cas. 
+
+Pour estimer un modèle de régression logistique ordinale, on utilise la fonction `polr()` du package `MASS`. Mais avant cela, on commence d'abord par changer les modalités de référence des variables factorielles en utilisant la fonction `relevel()`. En fait, R choisit par défaut la première modalité comme référence, alors que pour avoir des meilleures interprétations on est obligé de changer la référence (_par exemple quand la variable est ordonnée on préfère choisir comme modalité de référence une modalité plutôt centrale_) :
+
+
+```{r polr, message=FALSE, warning=FALSE}
+# Changer les ref
+d$niv_education <- relevel(d$niv_education, ref = "junior college") ## la modalité centrale comme réf
+d$etat_matrimonial <- relevel(d$etat_matrimonial, ref = "married") ## on choisit ici la catégorie marié(e) comme réf
+d$sit_financiere <- relevel(d$sit_financiere, ref = "average") ## la modalité centrale comme réf
+d$niv_sante <- relevel(d$niv_sante, ref = "fair") ## la modalité centrale comme réf
+
+# d_train & d_test
+index <- sample(1:6000, 3000)
+d_train <- d[index,]
+d_test <- d[-index,]
+
+
+library(MASS)
+
+reg_model <- polr(niv_bonheur ~ age + niv_education + etat_matrimonial + sit_financiere + niv_sante, data = d_train)
+summary(reg_model)
+```
+
+Dans la sortie ci-dessus, on obtient les informations suivantes :
+
+- L'équation du modèle
+- Les coefficients de régression avec leurs valeurs, les erreurs standard et la valeur t. Il n'y a pas de test de signification par défaut mais nous pouvons calculer la valeur p en comparant la valeur t à la distribution normale standard.
+- Les estimations pour deux intercepts
+- La déviance résiduelle et l'AIC, qui sont utilisés pour comparer les performances de différents modèles.
+
+## Significativité des coefficients
+
+```{r coef, message=FALSE, warning=FALSE}
+
+summary_table <- coef(summary(reg_model))
+pval <- pnorm(abs(summary_table[, "t value"]),lower.tail = FALSE)* 2
+summary_table <- cbind(summary_table, "p value" = round(pval,3))
+summary_table
+
+
+```
+
+
+## Interprétations :
+
+```{r interpret, message=FALSE, warning=FALSE}
+# plot des effets
+library(effects)
+d_train$sit_financiere <- factor(d_train$sit_financiere, levels = c("far below average", "below average", "average", "above average", "far above average"))
+plot(Effect(focal.predictors = "sit_financiere", reg_model))
+
+d_train$niv_sante <- factor(d_train$niv_sante, levels = c("poor", "fair", "good", "excellent"))
+plot(Effect(focal.predictors = "niv_sante", reg_model))
+```
+
+
+
+
+## Evaluation du modèle
+
+**Matrice de confusion :**
+
+```{r model_eva, message=FALSE, warning=FALSE}
+
+predict_niv_bonheur <- predict(reg_model, d_test)
+table(d_test$niv_bonheur, predict_niv_bonheur)
+mean(as.character(d_test$niv_bonheur) == as.character(predict_niv_bonheur), na.rm = TRUE)
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

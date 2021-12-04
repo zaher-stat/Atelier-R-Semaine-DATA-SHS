@@ -1,0 +1,91 @@
+---
+title: "Module 1 &_1 bis : Traiter facilement ses données de A à Z avec R"
+subtitle: "Semaine Data-SHS 2021 ~ PUD Grenoble"
+author: "A. ZAHER"
+date: "6 et 7 Décembre 2021"
+output:
+  rmdformats::readthedown:
+    self_contained: true
+    highlight: kate
+    number_sections: yes
+  html_document:
+    number_sections: yes
+    theme: flatly
+    toc: yes
+    toc_float: yes
+    
+---
+
+
+```{r knitr_init, echo=FALSE, cache=FALSE, message=FALSE, error=FALSE, warning=FALSE}
+library(knitr)
+library(rmdformats)
+
+## Global options
+options(max.print="75")
+opts_chunk$set(echo=TRUE,
+	             cache=TRUE,
+               prompt=FALSE,
+#               tidy=TRUE,
+               comment=NA,
+               message=TRUE,
+               warning=TRUE)
+opts_knit$set(width=75)
+
+```
+
+![](./img/semaine-data-shs_2021.png)
+
+# Préambule
+
+Ce document présente un guide pratique pour l'atelier sur le traitement et l'analyse des données avec **R**, présenté lors de la semaine Data-SHS 2021 organisée par la [PUD Grenoble](https://www.msh-alpes.fr/plateformes/pud-ga). 
+
+L’ensemble des matériaux de la formation (_Slides, Bases de données et Scripts R_) sera communiqué sur le [repo GitHub dédié](exmpl.ma).
+
+# Pré-requis de la formation
+
+ * Apporter son ordinateur avec **R**, **Rstudio** et le package `tidyverse` installés.
+
+ * Vous pouvez installer R via ce lien : https://cloud.r-project.org/. \
+Il est également recommandé d'installer **R Tools**, qui est une collection d'outils nécessaires à la création de paquets R sous Windows :
+   - Sous windows télécharger [R Tools](https://cran.r-project.org/bin/windows/Rtools/)
+   - Sous MacOS X il faut probablement [installer les "command line tools" ou un compilateur gcc](https://github.com/kennethreitz/osx-gcc-installer) (pour pouvoir compiler des packages lorsque nécessaire)
+   
+ * Installer ensuite [Rstudio](https://www.rstudio.com/products/rstudio/download/preview/)
+ 
+ * Installer le package `tidyverse` 
+   - Pour installer le tidyverse, entrez dans la console : `install.packages("tidyverse")` puis appuyer sur entrée. 
+       * Si un warning s'affiche en précisant que le package n'est pas sous forme binaire, spécifier l'argument `type="source"` dans l'appel à la fonction `install.packages()`
+       * Au passage, on voit que RStudio apporte une couche d'assistance en proposant les arguments de la fonction `install.packages`
+       * Si le bouton "Stop" (en haut à droite de la console de Rstudio) est affiché et que le symbole `>` (invite de commande) n'est pas affiché, cela signifie que R continue de travailler. 
+   * Quand c’est terminé on a le texte :  
+   *The downloaded source packages are in "C:\\Users\\name_user\\AppData\\Local\\Temp\\RtmpCgQOmA\\downloaded_packages"* (ou équivalent)
+   * L’invite de commande est revenue : c’est ce symbole en début de ligne : `>`
+   * Il est également possible d'installer des packages individuellement via Rstudio (bouton Install à droite de l'IHM). Logique de R : tout peut être fait en lignes de commande.
+   
+ * Aucune connaissance préalable du logiciel RStudio n’est nécessaire, la formation étant conçue aussi bien pour des débutants en R que pour ceux qui le pratiquent déjà.
+
+# Les étapes de la formation : 
+
+## Première démo : {-} 
+
+L'objectif de cette démonstration est d'illustrer l'un des usages potentiels de R.
+
+## 1ère partie : Présentation de R {-}
+
+- Pourquoi utiliser R du début à la fin du traitement de données ?
+- Le concept du package `tidyverse`
+- Prendre R en main
+
+## 2ème partie : le RMarkdown {-}
+
+- Diffuser et publier avec RMarkdown : Comment créer un nouveau document ?
+- Eléments d'un document RMarkdown
+- Compiler un document RMarkdown
+
+## 3ème partie : Présentation de la démarche globale de l'analyse : explorer, manipuler, tracer et modéliser {-}
+
+- Présentation du jeu de données à utiliser
+- Visualiser ses données (graphiques)
+- Transformer ses tableaux, faire des opérations groupées (moyennes, sommes, écart-type)
+- Faire des tests statistiques groupés et sortir les résultats et les indicateurs dans des tableaux
