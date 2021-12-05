@@ -1,5 +1,5 @@
 ---
-title: "Démarche global de l'analyse"
+title: "Démarche globale de l'analyse"
 author: "A. Zaher"
 ratio: 16x10
 output:
@@ -95,11 +95,11 @@ pre { /* Code block - determines code spacing between lines */
 </style>
 
 
-## Démarche global de l'analyse des données
+## Démarche globale de l'analyse des données
 
 <img src="./img/global_process_data_analysis.png" class="center" style="width: 700px; height: 400px;">
 
-## Démarche global de l'analyse des données (avec R)
+## Démarche globale de l'analyse des données (avec R)
 
 <img src="./img/global_process_R.png" class="center" style="width: 700px; height: 400px;">
 
