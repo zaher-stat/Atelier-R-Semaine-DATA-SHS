@@ -196,14 +196,13 @@ pre { /* Code block - determines code spacing between lines */
 <p><strong>Début du tutoriel</strong></p>
 <p>- <strong>Accéder au dossier “Tutoriels” et ouvrir le fichier :</strong> <code>1_data_manipulation.rmd</code> <em>(après avoir télécharger le projet sur GitHub : <a href="https://github.com/zaher-stat/Atelier-R-Semaine-DATA-SHS" class="uri">https://github.com/zaher-stat/Atelier-R-Semaine-DATA-SHS</a>)</em></p>
 <p>- <strong>Importer le jeu de données :</strong> <code>Intensité_symptômes_dépressif.csv</code> (qui se trouve dans le fichier “Tutoriels/Data”) <em>Il s’agit de données sur l’intensité des symptômes dépressifs fournies par <a href="https://ec.europa.eu/eurostat/databrowser/bookmark/eb8c07a3-224b-4e23-9acb-f09d18e99af5?lang=fr">Eurostat</a></em></p>
-<p><font size="4">  <em>NB : avant de compiler le fichier Rmarkdown, télécharger l’extension <code>rmdformats</code> pour avoir le thème choisi dans l’en-tête du fichier ( rmdformats::readthedown).</em> </font></p>
 </section>
 <section id="data-import-2" class="slide level2">
 <h2>Data import</h2>
 <div class="sourceCode" id="cb1"><pre class="sourceCode r source_style"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" title="1"><span class="kw">library</span>(tidyverse)</a>
 <a class="sourceLine" id="cb1-2" title="2"><span class="kw">library</span>(readr)</a></code></pre></div>
-<div class="sourceCode" id="cb2"><pre class="sourceCode r source_style"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" title="1">data_int_dep &lt;-<span class="st"> </span><span class="kw">read_csv2</span>(<span class="st">&quot;../Tutoriels/Data/Intensité_symptômes_dépressif.csv&quot;</span>)</a>
-<a class="sourceLine" id="cb2-2" title="2">data_int_dep</a></code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r source_style"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" title="1">intensite_depressif &lt;-<span class="st"> </span><span class="kw">read_csv2</span>(<span class="st">&quot;../Tutoriels/Data/Intensité_symptômes_dépressif.csv&quot;</span>)</a>
+<a class="sourceLine" id="cb2-2" title="2">intensite_depressif</a></code></pre></div>
 <pre><code>## # A tibble: 500 x 6
 ##    Pays   Classe_âge     Sexe  Quintile_revenu Classe_intensité  Pourcentage
 ##    &lt;chr&gt;  &lt;chr&gt;          &lt;chr&gt; &lt;chr&gt;           &lt;chr&gt;                   &lt;dbl&gt;
@@ -223,10 +222,10 @@ pre { /* Code block - determines code spacing between lines */
 <section id="manipulation-des-données" class="slide level2">
 <h2>Manipulation des données</h2>
 <p>- <strong>Afficher les variables de la base de données :</strong></p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode r source_style"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" title="1"><span class="kw">colnames</span>(data_int_dep)</a></code></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r source_style"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" title="1"><span class="kw">colnames</span>(intensite_depressif)</a></code></pre></div>
 <pre><code>## [1] &quot;Pays&quot;             &quot;Classe_âge&quot;       &quot;Sexe&quot;             &quot;Quintile_revenu&quot; 
 ## [5] &quot;Classe_intensité&quot; &quot;Pourcentage&quot;</code></pre>
-<div class="sourceCode" id="cb6"><pre class="sourceCode r source_style"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" title="1"><span class="kw">str</span>(data_int_dep)</a></code></pre></div>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r source_style"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" title="1"><span class="kw">str</span>(intensite_depressif)</a></code></pre></div>
 <pre><code>## spec_tbl_df [500 x 6] (S3: spec_tbl_df/tbl_df/tbl/data.frame)
 ##  $ Pays            : chr [1:500] &quot;France&quot; &quot;France&quot; &quot;France&quot; &quot;France&quot; ...
 ##  $ Classe_âge      : chr [1:500] &quot;De 15 à 24 ans&quot; &quot;De 15 à 24 ans&quot; &quot;De 15 à 24 ans&quot; &quot;De 15 à 24 ans&quot; ...
@@ -247,30 +246,31 @@ pre { /* Code block - determines code spacing between lines */
 <section id="manipulation-des-données-1" class="slide level2">
 <h2>Manipulation des données</h2>
 <p>- <strong>Accéder aux variables de la BD :</strong></p>
-<div class="sourceCode" id="cb8"><pre class="sourceCode r source_style"><code class="sourceCode r"><a class="sourceLine" id="cb8-1" title="1">data_int_dep<span class="op">$</span>Pays</a>
+<p><strong>Nom_base_donnees$Nom_variable</strong></p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r source_style"><code class="sourceCode r"><a class="sourceLine" id="cb8-1" title="1">intensite_depressif<span class="op">$</span>Pays</a>
 <a class="sourceLine" id="cb8-2" title="2"></a>
-<a class="sourceLine" id="cb8-3" title="3">data_int_dep<span class="op">$</span>Classe_âge</a>
+<a class="sourceLine" id="cb8-3" title="3">intensite_depressif<span class="op">$</span>Classe_âge</a>
 <a class="sourceLine" id="cb8-4" title="4"></a>
-<a class="sourceLine" id="cb8-5" title="5">data_int_dep<span class="op">$</span>Sexe</a>
+<a class="sourceLine" id="cb8-5" title="5">intensite_depressif<span class="op">$</span>Sexe</a>
 <a class="sourceLine" id="cb8-6" title="6"></a>
-<a class="sourceLine" id="cb8-7" title="7">data_int_dep<span class="op">$</span>Quintile_revenu</a>
+<a class="sourceLine" id="cb8-7" title="7">intensite_depressif<span class="op">$</span>Quintile_revenu</a>
 <a class="sourceLine" id="cb8-8" title="8"></a>
-<a class="sourceLine" id="cb8-9" title="9">data_int_dep<span class="op">$</span>Classe_intensité</a>
+<a class="sourceLine" id="cb8-9" title="9">intensite_depressif<span class="op">$</span>Classe_intensité</a>
 <a class="sourceLine" id="cb8-10" title="10"></a>
-<a class="sourceLine" id="cb8-11" title="11">data_int_dep<span class="op">$</span>Pourcentage</a></code></pre></div>
+<a class="sourceLine" id="cb8-11" title="11">intensite_depressif<span class="op">$</span>Pourcentage</a></code></pre></div>
 </section>
 <section id="manipulation-des-données-2" class="slide level2">
 <h2>Manipulation des données</h2>
 <p>- <strong>Tri à plat (variables qualitatives) :</strong></p>
-<div class="sourceCode" id="cb9"><pre class="sourceCode r source_style"><code class="sourceCode r"><a class="sourceLine" id="cb9-1" title="1"><span class="kw">table</span>(data_int_dep<span class="op">$</span>Pays)</a></code></pre></div>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r source_style"><code class="sourceCode r"><a class="sourceLine" id="cb9-1" title="1"><span class="kw">table</span>(intensite_depressif<span class="op">$</span>Pays)</a></code></pre></div>
 <pre><code>## 
 ## Allemagne    France 
 ##       250       250</code></pre>
-<div class="sourceCode" id="cb11"><pre class="sourceCode r source_style"><code class="sourceCode r"><a class="sourceLine" id="cb11-1" title="1"><span class="kw">table</span>(data_int_dep<span class="op">$</span>Classe_âge)</a></code></pre></div>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r source_style"><code class="sourceCode r"><a class="sourceLine" id="cb11-1" title="1"><span class="kw">table</span>(intensite_depressif<span class="op">$</span>Classe_âge)</a></code></pre></div>
 <pre><code>## 
 ## De 15 à 24 ans De 25 à 34 ans De 35 à 44 ans De 45 à 54 ans De 55 à 64 ans 
 ##            100            100            100            100            100</code></pre>
-<div class="sourceCode" id="cb13"><pre class="sourceCode r source_style"><code class="sourceCode r"><a class="sourceLine" id="cb13-1" title="1"><span class="kw">table</span>(data_int_dep<span class="op">$</span>Sexe)</a></code></pre></div>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r source_style"><code class="sourceCode r"><a class="sourceLine" id="cb13-1" title="1"><span class="kw">table</span>(intensite_depressif<span class="op">$</span>Sexe)</a></code></pre></div>
 <pre><code>## 
 ##   F   H 
 ## 250 250</code></pre>
@@ -278,11 +278,11 @@ pre { /* Code block - determines code spacing between lines */
 <section id="manipulation-des-données-3" class="slide level2">
 <h2>Manipulation des données</h2>
 <p>- <strong>Tri à plat (variables qualitatives) :</strong></p>
-<div class="sourceCode" id="cb15"><pre class="sourceCode r source_style"><code class="sourceCode r"><a class="sourceLine" id="cb15-1" title="1"><span class="kw">table</span>(data_int_dep<span class="op">$</span>Quintile_revenu)</a></code></pre></div>
+<div class="sourceCode" id="cb15"><pre class="sourceCode r source_style"><code class="sourceCode r"><a class="sourceLine" id="cb15-1" title="1"><span class="kw">table</span>(intensite_depressif<span class="op">$</span>Quintile_revenu)</a></code></pre></div>
 <pre><code>## 
 ##  1er_quintile 2eme_quintile 3eme_quintile 4eme_quintile 5eme_quintile 
 ##           100           100           100           100           100</code></pre>
-<div class="sourceCode" id="cb17"><pre class="sourceCode r source_style"><code class="sourceCode r"><a class="sourceLine" id="cb17-1" title="1"><span class="kw">table</span>(data_int_dep<span class="op">$</span>Classe_intensité)</a></code></pre></div>
+<div class="sourceCode" id="cb17"><pre class="sourceCode r source_style"><code class="sourceCode r"><a class="sourceLine" id="cb17-1" title="1"><span class="kw">table</span>(intensite_depressif<span class="op">$</span>Classe_intensité)</a></code></pre></div>
 <pre><code>## 
 ##  Aucun ou minimum            Faible             Grave            Modéré 
 ##               100               100               100               100 
@@ -301,8 +301,8 @@ pre { /* Code block - determines code spacing between lines */
 <section id="manipulation-des-données-avec-dplyr-1" class="slide level2">
 <h2>Manipulation des données avec <code>dplyr</code></h2>
 <p>- <strong>Sélectionner les données de la France :</strong></p>
-<div class="sourceCode" id="cb19"><pre class="sourceCode r source_style"><code class="sourceCode r"><a class="sourceLine" id="cb19-1" title="1">data_int_dep_Fr &lt;-<span class="st"> </span>data_int_dep <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">filter</span>(Pays <span class="op">==</span><span class="st"> &quot;France&quot;</span>)</a>
-<a class="sourceLine" id="cb19-2" title="2">data_int_dep_Fr</a></code></pre></div>
+<div class="sourceCode" id="cb19"><pre class="sourceCode r source_style"><code class="sourceCode r"><a class="sourceLine" id="cb19-1" title="1">intensite_depressif_Fr &lt;-<span class="st"> </span>intensite_depressif <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">filter</span>(Pays <span class="op">==</span><span class="st"> &quot;France&quot;</span>)</a>
+<a class="sourceLine" id="cb19-2" title="2">intensite_depressif_Fr</a></code></pre></div>
 <pre><code>## # A tibble: 250 x 6
 ##    Pays   Classe_âge     Sexe  Quintile_revenu Classe_intensité  Pourcentage
 ##    &lt;chr&gt;  &lt;chr&gt;          &lt;chr&gt; &lt;chr&gt;           &lt;chr&gt;                   &lt;dbl&gt;
@@ -321,8 +321,8 @@ pre { /* Code block - determines code spacing between lines */
 <section id="manipulation-des-données-avec-dplyr-2" class="slide level2">
 <h2>Manipulation des données avec <code>dplyr</code></h2>
 <p>- <strong>Sélectionner les données de la France pour la classe d’âge de 25 à 34 ans :</strong></p>
-<div class="sourceCode" id="cb21"><pre class="sourceCode r source_style"><code class="sourceCode r"><a class="sourceLine" id="cb21-1" title="1">data_int_dep_Fr_<span class="dv">34</span> &lt;-<span class="st"> </span>data_int_dep <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">filter</span>(Pays <span class="op">==</span><span class="st"> &quot;France&quot;</span> <span class="op">&amp;</span><span class="st"> </span>Classe_âge <span class="op">==</span><span class="st"> &quot;De 25 à 34 ans&quot;</span>)</a>
-<a class="sourceLine" id="cb21-2" title="2">data_int_dep_Fr_<span class="dv">34</span></a></code></pre></div>
+<div class="sourceCode" id="cb21"><pre class="sourceCode r source_style"><code class="sourceCode r"><a class="sourceLine" id="cb21-1" title="1">intensite_depressif_Fr_CA34 &lt;-<span class="st"> </span>intensite_depressif <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">filter</span>(Pays <span class="op">==</span><span class="st"> &quot;France&quot;</span> <span class="op">&amp;</span><span class="st"> </span>Classe_âge <span class="op">==</span><span class="st"> &quot;De 25 à 34 ans&quot;</span>)</a>
+<a class="sourceLine" id="cb21-2" title="2">intensite_depressif_Fr_CA34</a></code></pre></div>
 <pre><code>## # A tibble: 50 x 6
 ##    Pays   Classe_âge     Sexe  Quintile_revenu Classe_intensité  Pourcentage
 ##    &lt;chr&gt;  &lt;chr&gt;          &lt;chr&gt; &lt;chr&gt;           &lt;chr&gt;                   &lt;dbl&gt;
@@ -341,7 +341,7 @@ pre { /* Code block - determines code spacing between lines */
 <section id="enchaîner-les-opérations-avec" class="slide level2">
 <h2>Enchaîner les opérations avec <code>%&gt;%</code></h2>
 <p>- <strong>Extraire les données de la France pour la classe d’âge de 25 à 34 ans avec <code>filter</code>, sélectionner les colonnes “Classe_âge” et “Pourcentage” avec <code>select</code> puis trier selon la variable “Pourcentage” avec <code>arrange</code> :</strong></p>
-<div class="sourceCode" id="cb23"><pre class="sourceCode r source_style"><code class="sourceCode r"><a class="sourceLine" id="cb23-1" title="1">data_int_dep <span class="op">%&gt;%</span><span class="st"> </span></a>
+<div class="sourceCode" id="cb23"><pre class="sourceCode r source_style"><code class="sourceCode r"><a class="sourceLine" id="cb23-1" title="1">intensite_depressif <span class="op">%&gt;%</span><span class="st"> </span></a>
 <a class="sourceLine" id="cb23-2" title="2"><span class="st">  </span><span class="kw">filter</span>(Pays <span class="op">==</span><span class="st"> &quot;France&quot;</span> <span class="op">&amp;</span><span class="st"> </span>Classe_âge <span class="op">==</span><span class="st"> &quot;De 25 à 34 ans&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
 <a class="sourceLine" id="cb23-3" title="3"><span class="st">  </span><span class="kw">select</span>(Classe_âge, Pourcentage) <span class="op">%&gt;%</span><span class="st"> </span></a>
 <a class="sourceLine" id="cb23-4" title="4"><span class="st">  </span><span class="kw">arrange</span>(Pourcentage)</a></code></pre></div>
@@ -369,7 +369,7 @@ pre { /* Code block - determines code spacing between lines */
 <section id="opérations-groupées-1" class="slide level2">
 <h2>Opérations groupées</h2>
 <p>- <strong>Exemple : Calculer le pourcentage moyen par classe d’intensité</strong></p>
-<div class="sourceCode" id="cb25"><pre class="sourceCode r source_style"><code class="sourceCode r"><a class="sourceLine" id="cb25-1" title="1">data_int_dep_Fr <span class="op">%&gt;%</span></a>
+<div class="sourceCode" id="cb25"><pre class="sourceCode r source_style"><code class="sourceCode r"><a class="sourceLine" id="cb25-1" title="1">intensite_depressif_Fr <span class="op">%&gt;%</span></a>
 <a class="sourceLine" id="cb25-2" title="2"><span class="st">  </span><span class="kw">group_by</span>(Classe_intensité) <span class="op">%&gt;%</span></a>
 <a class="sourceLine" id="cb25-3" title="3"><span class="st">  </span><span class="kw">summarise</span>(<span class="dt">Moyenne =</span> <span class="kw">mean</span>(Pourcentage))</a></code></pre></div>
 <pre><code>## # A tibble: 5 x 2
@@ -384,7 +384,7 @@ pre { /* Code block - determines code spacing between lines */
 <section id="opérations-groupées-2" class="slide level2">
 <h2>Opérations groupées</h2>
 <p>- <strong>Exemple : Calculer le pourcentage moyen par classe d’intensité et par classe d’âge</strong></p>
-<div class="sourceCode" id="cb27"><pre class="sourceCode r source_style"><code class="sourceCode r"><a class="sourceLine" id="cb27-1" title="1">data_int_dep_Fr <span class="op">%&gt;%</span></a>
+<div class="sourceCode" id="cb27"><pre class="sourceCode r source_style"><code class="sourceCode r"><a class="sourceLine" id="cb27-1" title="1">intensite_depressif_Fr <span class="op">%&gt;%</span></a>
 <a class="sourceLine" id="cb27-2" title="2"><span class="st">  </span><span class="kw">group_by</span>(Classe_intensité, Classe_âge) <span class="op">%&gt;%</span></a>
 <a class="sourceLine" id="cb27-3" title="3"><span class="st">  </span><span class="kw">summarise</span>(<span class="dt">Moyenne =</span> <span class="kw">mean</span>(Pourcentage))</a></code></pre></div>
 <div style="border: 1px solid #ddd; padding: 0px; overflow-y: scroll; height:200px; overflow-x: scroll; width:500px; ">
@@ -685,14 +685,14 @@ De 55 à 64 ans
 <section id="visualiser-avec-ggplot2" class="slide level2">
 <h2>Visualiser avec <code>ggplot2</code></h2>
 <p>- Un graphique <code>ggplot2</code> s’initialise à l’aide de la fonction <code>ggplot()</code>, qui prend en argument la tableau des données :</p>
-<div class="sourceCode" id="cb28"><pre class="sourceCode r source_style"><code class="sourceCode r"><a class="sourceLine" id="cb28-1" title="1"><span class="kw">ggplot</span>(<span class="dt">data =</span> data_int_dep_Fr)</a></code></pre></div>
+<div class="sourceCode" id="cb28"><pre class="sourceCode r source_style"><code class="sourceCode r"><a class="sourceLine" id="cb28-1" title="1"><span class="kw">ggplot</span>(<span class="dt">data =</span> intensite_depressif_Fr)</a></code></pre></div>
 <p>- les éléments de représentation graphique sont appelés des <code>geom</code>, et on les ajoute à l’objet graphique de base avec l’opérateur <code>+</code> :</p>
-<div class="sourceCode" id="cb29"><pre class="sourceCode r source_style"><code class="sourceCode r"><a class="sourceLine" id="cb29-1" title="1"><span class="kw">ggplot</span>(<span class="dt">data =</span> data_int_dep_Fr) <span class="op">+</span><span class="st"> </span><span class="kw">geom_histogram</span>()</a></code></pre></div>
+<div class="sourceCode" id="cb29"><pre class="sourceCode r source_style"><code class="sourceCode r"><a class="sourceLine" id="cb29-1" title="1"><span class="kw">ggplot</span>(<span class="dt">data =</span> intensite_depressif_Fr) <span class="op">+</span><span class="st"> </span><span class="kw">geom_histogram</span>()</a></code></pre></div>
 </section>
 <section id="visualiser-avec-ggplot2-1" class="slide level2">
 <h2>Visualiser avec <code>ggplot2</code></h2>
 <p>- Reste à indiquer quelle donnée nous voulons représenter sous forme d’histogramme. Cela se fait à l’aide d’arguments passés via la fonction <code>aes()</code> :</p>
-<div class="sourceCode" id="cb30"><pre class="sourceCode r source_style"><code class="sourceCode r"><a class="sourceLine" id="cb30-1" title="1"><span class="kw">ggplot</span>(<span class="dt">data =</span> data_int_dep_Fr) <span class="op">+</span><span class="st"> </span><span class="kw">geom_histogram</span>(<span class="kw">aes</span>(<span class="dt">x =</span> Pourcentage))</a></code></pre></div>
+<div class="sourceCode" id="cb30"><pre class="sourceCode r source_style"><code class="sourceCode r"><a class="sourceLine" id="cb30-1" title="1"><span class="kw">ggplot</span>(<span class="dt">data =</span> intensite_depressif_Fr) <span class="op">+</span><span class="st"> </span><span class="kw">geom_histogram</span>(<span class="kw">aes</span>(<span class="dt">x =</span> Pourcentage))</a></code></pre></div>
 <p><img src="3_Démarche_Globale_Analyse_files/figure-revealjs/data_visual3-1.png" width="480" /></p>
 </section>
 <section id="visualiser-avec-ggplot2-2" class="slide level2">
@@ -704,7 +704,7 @@ De 55 à 64 ans
 <h2>Visualiser avec <code>ggplot2</code></h2>
 <p>- <strong>Tracer un diagramme en bâton pour le pourcentage de chaque classe d’intensité chez les femmes âgée de 45 à 54 ans dans le 5ème quintile de revenu.</strong></p>
 <div class="sourceCode" id="cb31"><pre class="sourceCode r source_style"><code class="sourceCode r"><a class="sourceLine" id="cb31-1" title="1"><span class="co">## Préparation des données </span></a>
-<a class="sourceLine" id="cb31-2" title="2">data_plot &lt;-<span class="st"> </span>data_int_dep_Fr <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">filter</span>(Classe_âge <span class="op">==</span><span class="st"> &quot;De 45 à 54 ans&quot;</span> <span class="op">&amp;</span><span class="st"> </span>Sexe <span class="op">==</span><span class="st"> &quot;F&quot;</span> <span class="op">&amp;</span><span class="st"> </span>Quintile_revenu <span class="op">==</span><span class="st"> &quot;5eme_quintile&quot;</span>)</a>
+<a class="sourceLine" id="cb31-2" title="2">data_plot &lt;-<span class="st"> </span>intensite_depressif_Fr <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">filter</span>(Classe_âge <span class="op">==</span><span class="st"> &quot;De 45 à 54 ans&quot;</span> <span class="op">&amp;</span><span class="st"> </span>Sexe <span class="op">==</span><span class="st"> &quot;F&quot;</span> <span class="op">&amp;</span><span class="st"> </span>Quintile_revenu <span class="op">==</span><span class="st"> &quot;5eme_quintile&quot;</span>)</a>
 <a class="sourceLine" id="cb31-3" title="3"></a>
 <a class="sourceLine" id="cb31-4" title="4"><span class="co">## Plot</span></a>
 <a class="sourceLine" id="cb31-5" title="5"><span class="kw">ggplot</span>(<span class="dt">data =</span> data_plot) <span class="op">+</span><span class="st"> </span><span class="kw">geom_bar</span>(<span class="kw">aes</span>(<span class="dt">x =</span> Classe_intensité, <span class="dt">y =</span> Pourcentage), <span class="dt">stat =</span> <span class="st">&quot;identity&quot;</span>)</a></code></pre></div>
@@ -714,7 +714,7 @@ De 55 à 64 ans
 <h2>Visualiser avec <code>ggplot2</code></h2>
 <p>- <strong>Représenter des boîtes à moustaches pour les classes d’âges chez la population représentant des intensités sévères.</strong></p>
 <div class="sourceCode" id="cb32"><pre class="sourceCode r source_style"><code class="sourceCode r"><a class="sourceLine" id="cb32-1" title="1"><span class="co">## Préparation des données </span></a>
-<a class="sourceLine" id="cb32-2" title="2">data_plot &lt;-<span class="st"> </span>data_int_dep_Fr <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">filter</span>(Classe_intensité <span class="op">==</span><span class="st"> &quot;Grave&quot;</span>)</a>
+<a class="sourceLine" id="cb32-2" title="2">data_plot &lt;-<span class="st"> </span>intensite_depressif_Fr <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">filter</span>(Classe_intensité <span class="op">==</span><span class="st"> &quot;Grave&quot;</span>)</a>
 <a class="sourceLine" id="cb32-3" title="3"></a>
 <a class="sourceLine" id="cb32-4" title="4"><span class="co">## Plot</span></a>
 <a class="sourceLine" id="cb32-5" title="5"><span class="kw">ggplot</span>(<span class="dt">data =</span> data_plot) <span class="op">+</span><span class="st"> </span><span class="kw">geom_boxplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> Classe_âge, <span class="dt">y =</span> Pourcentage), <span class="dt">fill =</span> <span class="st">&quot;steelblue&quot;</span>)</a></code></pre></div>
@@ -728,6 +728,11 @@ De 55 à 64 ans
 <a class="sourceLine" id="cb33-2" title="2"><span class="st">  </span><span class="kw">geom_boxplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> Classe_âge, <span class="dt">y =</span> Pourcentage)) <span class="op">+</span></a>
 <a class="sourceLine" id="cb33-3" title="3"><span class="st">  </span><span class="kw">facet_wrap</span>(<span class="kw">vars</span>(Sexe))</a></code></pre></div>
 <p><img src="3_Démarche_Globale_Analyse_files/figure-revealjs/data_visual6-1.png" width="768" /></p>
+</section>
+<section id="compiler-le-fichier-rmarkdown" class="slide level2">
+<h2>Compiler le fichier RMarkdown</h2>
+<p>- Pour compiler le fichier entier, appuyez sur le bouton <strong>Knit</strong> ou <code>Ctrl+Maj+K</code></p>
+<p><font size="4">  <em>NB : avant de compiler le fichier Rmarkdown, télécharger l’extension <code>rmdformats</code> pour avoir le thème choisi dans l’en-tête du fichier (rmdformats::readthedown).</em> </font></p>
 </section>
 <section id="ème-tutoriel-analyse-statistique-complète" class="title-slide slide level1"><h1>2ème tutoriel : Analyse statistique complète !</h1><p>Module 1 bis (7 décembre 2021) : <a href="./Tutoriels/2_data_analysis.html">Accéder au tutoriel</a></p></section>
 

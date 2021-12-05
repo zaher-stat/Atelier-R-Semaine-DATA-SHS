@@ -125,9 +125,6 @@ pre { /* Code block - determines code spacing between lines */
 \- __Importer le jeu de données :__ `Intensité_symptômes_dépressif.csv` (qui se trouve dans le fichier "Tutoriels/Data")
 _Il s'agit de données sur l'intensité des symptômes dépressifs fournies par [Eurostat](https://ec.europa.eu/eurostat/databrowser/bookmark/eb8c07a3-224b-4e23-9acb-f09d18e99af5?lang=fr)_
 
-<font size="4">
-\ _NB : avant de compiler le fichier Rmarkdown, télécharger l'extension `rmdformats` pour avoir le thème choisi dans l'en-tête du fichier ( rmdformats::readthedown)._ 
-</font>
 
 ## Data import
 
@@ -137,8 +134,8 @@ library(readr)
 ```
 
 ```{r data import, message=FALSE, warning=FALSE}
-data_int_dep <- read_csv2("../Tutoriels/Data/Intensité_symptômes_dépressif.csv")
-data_int_dep
+intensite_depressif <- read_csv2("../Tutoriels/Data/Intensité_symptômes_dépressif.csv")
+intensite_depressif
 ```
 
 ==> Les données sont-elles "tidy" ?
@@ -148,28 +145,30 @@ data_int_dep
 \- __Afficher les variables de la base de données :__
 
 ```{r data_manip1, message=FALSE, warning=FALSE}
-colnames(data_int_dep)
+colnames(intensite_depressif)
 
-str(data_int_dep)
+str(intensite_depressif)
 ```
 
 ## Manipulation des données
 
 \- __Accéder aux variables de la BD :__
 
+**Nom_base_donnees$Nom_variable**
+
 ```{r data_manip2, eval=FALSE}
 
-data_int_dep$Pays
+intensite_depressif$Pays
 
-data_int_dep$Classe_âge
+intensite_depressif$Classe_âge
 
-data_int_dep$Sexe
+intensite_depressif$Sexe
 
-data_int_dep$Quintile_revenu
+intensite_depressif$Quintile_revenu
 
-data_int_dep$Classe_intensité
+intensite_depressif$Classe_intensité
 
-data_int_dep$Pourcentage
+intensite_depressif$Pourcentage
 
 ```
 
@@ -180,11 +179,11 @@ data_int_dep$Pourcentage
 
 ```{r data_manip3, message=FALSE, warning=FALSE}
 
-table(data_int_dep$Pays)
+table(intensite_depressif$Pays)
 
-table(data_int_dep$Classe_âge)
+table(intensite_depressif$Classe_âge)
 
-table(data_int_dep$Sexe)
+table(intensite_depressif$Sexe)
 
 ```
 
@@ -194,9 +193,9 @@ table(data_int_dep$Sexe)
 
 ```{r data_manip4, message=FALSE, warning=FALSE}
 
-table(data_int_dep$Quintile_revenu)
+table(intensite_depressif$Quintile_revenu)
 
-table(data_int_dep$Classe_intensité)
+table(intensite_depressif$Classe_intensité)
 
 ```
 
@@ -220,8 +219,8 @@ Les verbes de dplyr :
 
 ```{r data_manip5, message=FALSE, warning=FALSE}
 
-data_int_dep_Fr <- data_int_dep %>% filter(Pays == "France")
-data_int_dep_Fr
+intensite_depressif_Fr <- intensite_depressif %>% filter(Pays == "France")
+intensite_depressif_Fr
 
 ```
 
@@ -232,8 +231,8 @@ data_int_dep_Fr
 
 ```{r data_manip6, message=FALSE, warning=FALSE}
 
-data_int_dep_Fr_34 <- data_int_dep %>% filter(Pays == "France" & Classe_âge == "De 25 à 34 ans")
-data_int_dep_Fr_34
+intensite_depressif_Fr_CA34 <- intensite_depressif %>% filter(Pays == "France" & Classe_âge == "De 25 à 34 ans")
+intensite_depressif_Fr_CA34
 
 ```
 
@@ -243,7 +242,7 @@ data_int_dep_Fr_34
 
 ```{r data_manip7, message=FALSE, warning=FALSE}
 
-data_int_dep %>% 
+intensite_depressif %>% 
   filter(Pays == "France" & Classe_âge == "De 25 à 34 ans") %>% 
   select(Classe_âge, Pourcentage) %>% 
   arrange(Pourcentage)
@@ -259,13 +258,14 @@ data_int_dep %>%
 
 \- `count()` : pour compter le nombre de lignes par groupe
 
+
 ## Opérations groupées
 
 \- __Exemple : Calculer le pourcentage moyen par classe d'intensité__
 
 ```{r data_manip8, message=FALSE, warning=FALSE}
 
-data_int_dep_Fr %>%
+intensite_depressif_Fr %>%
   group_by(Classe_intensité) %>%
   summarise(Moyenne = mean(Pourcentage))
   
@@ -278,14 +278,14 @@ data_int_dep_Fr %>%
 
 ```{r data_manip9, eval=FALSE, message=FALSE, warning=FALSE}
 
-data_int_dep_Fr %>%
+intensite_depressif_Fr %>%
   group_by(Classe_intensité, Classe_âge) %>%
   summarise(Moyenne = mean(Pourcentage))
 
 ```
 
 ```{r data_manip9_bis, echo=FALSE, eval=TRUE, message=FALSE, warning=FALSE}
-tab <-data_int_dep_Fr %>%
+tab <-intensite_depressif_Fr %>%
   group_by(Classe_intensité, Classe_âge) %>%
   summarise(Moyenne = mean(Pourcentage))
 
@@ -304,7 +304,7 @@ kableExtra::kable(tab) %>%
 
 ```{r data_visual1, eval=FALSE}
 
-ggplot(data = data_int_dep_Fr)
+ggplot(data = intensite_depressif_Fr)
 
 ```
 
@@ -312,7 +312,7 @@ ggplot(data = data_int_dep_Fr)
 
 ```{r data_visual2, eval=FALSE}
 
-ggplot(data = data_int_dep_Fr) + geom_histogram()
+ggplot(data = intensite_depressif_Fr) + geom_histogram()
 
 ```
 
@@ -322,7 +322,7 @@ ggplot(data = data_int_dep_Fr) + geom_histogram()
 
 ```{r data_visual3, eval=TRUE, message=FALSE, warning=FALSE, fig.width=5, fig.height=4}
 
-ggplot(data = data_int_dep_Fr) + geom_histogram(aes(x = Pourcentage))
+ggplot(data = intensite_depressif_Fr) + geom_histogram(aes(x = Pourcentage))
 
 ```
 
@@ -339,7 +339,7 @@ ggplot(data = data_int_dep_Fr) + geom_histogram(aes(x = Pourcentage))
 ```{r data_visual4, eval=TRUE, message=FALSE, warning=FALSE, fig.width=4, fig.height=3}
 
 ## Préparation des données 
-data_plot <- data_int_dep_Fr %>% filter(Classe_âge == "De 45 à 54 ans" & Sexe == "F" & Quintile_revenu == "5eme_quintile")
+data_plot <- intensite_depressif_Fr %>% filter(Classe_âge == "De 45 à 54 ans" & Sexe == "F" & Quintile_revenu == "5eme_quintile")
 
 ## Plot
 ggplot(data = data_plot) + geom_bar(aes(x = Classe_intensité, y = Pourcentage), stat = "identity")
@@ -354,7 +354,7 @@ ggplot(data = data_plot) + geom_bar(aes(x = Classe_intensité, y = Pourcentage),
 ```{r data_visual5, eval=TRUE, message=FALSE, warning=FALSE, fig.width=6, fig.height=3}
 
 ## Préparation des données 
-data_plot <- data_int_dep_Fr %>% filter(Classe_intensité == "Grave")
+data_plot <- intensite_depressif_Fr %>% filter(Classe_intensité == "Grave")
 
 ## Plot
 ggplot(data = data_plot) + geom_boxplot(aes(x = Classe_âge, y = Pourcentage), fill = "steelblue")
@@ -375,6 +375,17 @@ ggplot(data = data_plot) +
   facet_wrap(vars(Sexe))
 
 ```
+
+## Compiler le fichier RMarkdown
+
+\- Pour compiler le fichier entier, appuyez sur le bouton **Knit** ou `Ctrl+Maj+K`
+
+
+<font size="4">
+\ _NB : avant de compiler le fichier Rmarkdown, télécharger l'extension `rmdformats` pour avoir le thème choisi dans l'en-tête du fichier (rmdformats::readthedown)._ 
+</font>
+
+
 
 # 2ème tutoriel : Analyse statistique complète !
 

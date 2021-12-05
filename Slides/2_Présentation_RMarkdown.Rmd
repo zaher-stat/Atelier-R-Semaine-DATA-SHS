@@ -151,13 +151,9 @@ Cet exemple génèrera le texte mis en forme suivant :
 
 \- Le code R est inclus dans des blocs (_Chunks_) délimités par la syntaxe suivante :
 
-```
-\```{r}
- x <- 5
+<img src="./img/Chunk_r.png" class="center" style="width: 600px; height: 50px;">
 
-\```
 
-```
 \- Pour insérer un bloc de code `Ctrl+Alt+i` ou utiliser le menu _Insert_ :
 
 <img src="./img/insert_chunk.png" class="center" style="width: 90px; height: 200px;">
