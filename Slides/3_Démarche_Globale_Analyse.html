@@ -1,0 +1,747 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Démarche global de l’analyse</title>
+  <meta charset="utf-8">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="3_Démarche_Globale_Analyse_files/shower-ribbon/package/styles/screen-4x3.css">
+  <link rel="stylesheet" href="3_Démarche_Globale_Analyse_files\rmdshower/style-common.css">
+  <link rel="stylesheet" href="3_Démarche_Globale_Analyse_files\rmdshower/style-ribbon.css">
+  <link rel="stylesheet" href="3_Démarche_Globale_Analyse_files/shower-ribbon/style-override.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.5.1/katex.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.5.1/katex.min.js"></script>
+  <script src="3_Démarche_Globale_Analyse_files\rmdshower/auto-render.min.js" type="text/javascript"></script>
+  
+  
+    <style type="text/css">
+   a.sourceLine { display: inline-block; line-height: 1.25; }
+   a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+   a.sourceLine:empty { height: 1.2em; }
+   .sourceCode { overflow: visible; }
+   code.sourceCode { white-space: pre; position: relative; }
+   div.sourceCode { margin: 1em 0; }
+   pre.sourceCode { margin: 0; }
+   @media screen {
+   div.sourceCode { overflow: auto; }
+   }
+   @media print {
+   code.sourceCode { white-space: pre-wrap; }
+   a.sourceLine { text-indent: -1em; padding-left: 1em; }
+   }
+   pre.numberSource a.sourceLine
+     { position: relative; left: -4em; }
+   pre.numberSource a.sourceLine::before
+     { content: attr(title);
+       position: relative; left: -1em; text-align: right; vertical-align: baseline;
+       border: none; pointer-events: all; display: inline-block;
+       -webkit-touch-callout: none; -webkit-user-select: none;
+       -khtml-user-select: none; -moz-user-select: none;
+       -ms-user-select: none; user-select: none;
+       padding: 0 4px; width: 4em;
+       color: #aaaaaa;
+     }
+   pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+   div.sourceCode
+     {  }
+   @media screen {
+   a.sourceLine::before { text-decoration: underline; }
+   }
+   code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+   code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+   code span.at { color: #7d9029; } /* Attribute */
+   code span.bn { color: #40a070; } /* BaseN */
+   code span.bu { } /* BuiltIn */
+   code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+   code span.ch { color: #4070a0; } /* Char */
+   code span.cn { color: #880000; } /* Constant */
+   code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+   code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+   code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+   code span.dt { color: #902000; } /* DataType */
+   code span.dv { color: #40a070; } /* DecVal */
+   code span.er { color: #ff0000; font-weight: bold; } /* Error */
+   code span.ex { } /* Extension */
+   code span.fl { color: #40a070; } /* Float */
+   code span.fu { color: #06287e; } /* Function */
+   code span.im { } /* Import */
+   code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+   code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+   code span.op { color: #666666; } /* Operator */
+   code span.ot { color: #007020; } /* Other */
+   code span.pp { color: #bc7a00; } /* Preprocessor */
+   code span.sc { color: #4070a0; } /* SpecialChar */
+   code span.ss { color: #bb6688; } /* SpecialString */
+   code span.st { color: #4070a0; } /* String */
+   code span.va { color: #19177c; } /* Variable */
+   code span.vs { color: #4070a0; } /* VerbatimString */
+   code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+  </style>
+  
+  
+      <script src="3_Démarche_Globale_Analyse_files/kePrint-0.0.1/kePrint.js"></script>
+    <link href="3_Démarche_Globale_Analyse_files/lightable-0.0.1/lightable.css" rel="stylesheet" />
+  
+</head>
+
+<body class="shower list">
+
+  <header class="caption">
+    <h1>Démarche global de l’analyse</h1>
+    <p>A. Zaher</p>
+  </header>
+
+  
+  
+<section class="slide level2">
+
+<style type="text/css">
+.source_style {
+  max-width: 300px;
+  background-color: #5cb85c;
+}
+
+.output_style {
+  max-width: 500px;
+  background-color: #5cb85c;
+}
+
+figure{
+    display:inline-block;
+}
+
+.center {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 50%;
+}
+
+.topright { 
+  position: absolute; 
+  top: 50px; 
+  right: 200px; 
+} 
+
+/* Exercices */
+ 
+.solution-link {
+  width: 100%;
+  text-align: right;
+  font-size: 80%;
+  margin-top: -0.3em;
+  margin-bottom: 1.8em;
+}
+ 
+.solution-link a:before {
+  content: "Afficher ";
+}
+ 
+.solution-link.shown a:before {
+  content: "Masquer ";
+}
+ 
+.solution-exo {
+  margin-top: -1.3em;
+  margin-bottom: 1.2em;
+  padding-left: 1em;
+  border-left: 6px solid #4183C4;
+  display: none;
+}
+ 
+.solution-exo pre.sourceCode {
+  background-color: #f0f4fd;
+}
+
+</style>
+<style type="text/css">
+
+body{ /* Normal  */
+      font-size: 20px;
+  }
+td {  /* Table  */
+  font-size: 12px;
+}
+h1 { /* Header 1 */
+  font-size: 70px;
+  font-weight: bold;
+  color: #908789;
+}
+code.r{ /* Code block */
+    font-size: 20px;
+}
+pre { /* Code block - determines code spacing between lines */
+    font-size: 18px;
+}
+</style>
+</section>
+<section id="démarche-global-de-lanalyse-des-données" class="slide level2">
+<h2>Démarche global de l’analyse des données</h2>
+<p><img src="img/global_process_data_analysis.png" class="center" style="width: 700px; height: 400px;"></p>
+</section>
+<section id="démarche-global-de-lanalyse-des-données-avec-r" class="slide level2">
+<h2>Démarche global de l’analyse des données (avec R)</h2>
+<p><img src="img/global_process_R.png" class="center" style="width: 700px; height: 400px;"></p>
+</section>
+<section id="data-import" class="slide level2">
+<h2>Data import</h2>
+<!-- <img src="img/global_process_R.png" class="topright" style="width: 300px; height: 150px;"> -->
+<p>- le package <code>readr</code> est le plus utilisé pour l’importation des données dans R, notamment les deux fonctions :</p>
+<p><code>read_csv()</code> : séparateur <code>,</code></p>
+<p><code>read_csv2()</code> : séparateur <code>;</code></p>
+<p>- Le premier argument de <code>read_*()</code> est le plus important : c’est le chemin d’accès au fichier à lire.</p>
+</section>
+<section id="data-import-1" class="slide level2">
+<h2>Data import</h2>
+<p><strong>Début du tutoriel</strong></p>
+<p>- <strong>Accéder au dossier “Tutoriels” et ouvrir le fichier :</strong> <code>1_data_manipulation.rmd</code> <em>(après avoir télécharger le projet sur GitHub : <a href="https://github.com/zaher-stat/Atelier-R-Semaine-DATA-SHS" class="uri">https://github.com/zaher-stat/Atelier-R-Semaine-DATA-SHS</a>)</em></p>
+<p>- <strong>Importer le jeu de données :</strong> <code>Intensité_symptômes_dépressif.csv</code> (qui se trouve dans le fichier “Tutoriels/Data”) <em>Il s’agit de données sur l’intensité des symptômes dépressifs fournies par <a href="https://ec.europa.eu/eurostat/databrowser/bookmark/eb8c07a3-224b-4e23-9acb-f09d18e99af5?lang=fr">Eurostat</a></em></p>
+<p><font size="4">  <em>NB : avant de compiler le fichier Rmarkdown, télécharger l’extension <code>rmdformats</code> pour avoir le thème choisi dans l’en-tête du fichier ( rmdformats::readthedown).</em> </font></p>
+</section>
+<section id="data-import-2" class="slide level2">
+<h2>Data import</h2>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r source_style"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" title="1"><span class="kw">library</span>(tidyverse)</a>
+<a class="sourceLine" id="cb1-2" title="2"><span class="kw">library</span>(readr)</a></code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r source_style"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" title="1">data_int_dep &lt;-<span class="st"> </span><span class="kw">read_csv2</span>(<span class="st">&quot;../Tutoriels/Data/Intensité_symptômes_dépressif.csv&quot;</span>)</a>
+<a class="sourceLine" id="cb2-2" title="2">data_int_dep</a></code></pre></div>
+<pre><code>## # A tibble: 500 x 6
+##    Pays   Classe_âge     Sexe  Quintile_revenu Classe_intensité  Pourcentage
+##    &lt;chr&gt;  &lt;chr&gt;          &lt;chr&gt; &lt;chr&gt;           &lt;chr&gt;                   &lt;dbl&gt;
+##  1 France De 15 à 24 ans F     1er_quintile    Aucun ou minimum         50.2
+##  2 France De 15 à 24 ans F     1er_quintile    Faible                   35  
+##  3 France De 15 à 24 ans F     1er_quintile    Grave                     0.5
+##  4 France De 15 à 24 ans F     1er_quintile    Modéré                   11.8
+##  5 France De 15 à 24 ans F     1er_quintile    Moyennement grave         2.5
+##  6 France De 15 à 24 ans H     1er_quintile    Aucun ou minimum         67.7
+##  7 France De 15 à 24 ans H     1er_quintile    Faible                   24.4
+##  8 France De 15 à 24 ans H     1er_quintile    Grave                     0.3
+##  9 France De 15 à 24 ans H     1er_quintile    Modéré                    6.1
+## 10 France De 15 à 24 ans H     1er_quintile    Moyennement grave         1.5
+## # ... with 490 more rows</code></pre>
+<p>==&gt; Les données sont-elles “tidy” ?</p>
+</section>
+<section id="manipulation-des-données" class="slide level2">
+<h2>Manipulation des données</h2>
+<p>- <strong>Afficher les variables de la base de données :</strong></p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r source_style"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" title="1"><span class="kw">colnames</span>(data_int_dep)</a></code></pre></div>
+<pre><code>## [1] &quot;Pays&quot;             &quot;Classe_âge&quot;       &quot;Sexe&quot;             &quot;Quintile_revenu&quot; 
+## [5] &quot;Classe_intensité&quot; &quot;Pourcentage&quot;</code></pre>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r source_style"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" title="1"><span class="kw">str</span>(data_int_dep)</a></code></pre></div>
+<pre><code>## spec_tbl_df [500 x 6] (S3: spec_tbl_df/tbl_df/tbl/data.frame)
+##  $ Pays            : chr [1:500] &quot;France&quot; &quot;France&quot; &quot;France&quot; &quot;France&quot; ...
+##  $ Classe_âge      : chr [1:500] &quot;De 15 à 24 ans&quot; &quot;De 15 à 24 ans&quot; &quot;De 15 à 24 ans&quot; &quot;De 15 à 24 ans&quot; ...
+##  $ Sexe            : chr [1:500] &quot;F&quot; &quot;F&quot; &quot;F&quot; &quot;F&quot; ...
+##  $ Quintile_revenu : chr [1:500] &quot;1er_quintile&quot; &quot;1er_quintile&quot; &quot;1er_quintile&quot; &quot;1er_quintile&quot; ...
+##  $ Classe_intensité: chr [1:500] &quot;Aucun ou minimum&quot; &quot;Faible&quot; &quot;Grave&quot; &quot;Modéré&quot; ...
+##  $ Pourcentage     : num [1:500] 50.2 35 0.5 11.8 2.5 67.7 24.4 0.3 6.1 1.5 ...
+##  - attr(*, &quot;spec&quot;)=
+##   .. cols(
+##   ..   Pays = col_character(),
+##   ..   Classe_âge = col_character(),
+##   ..   Sexe = col_character(),
+##   ..   Quintile_revenu = col_character(),
+##   ..   Classe_intensité = col_character(),
+##   ..   Pourcentage = col_double()
+##   .. )</code></pre>
+</section>
+<section id="manipulation-des-données-1" class="slide level2">
+<h2>Manipulation des données</h2>
+<p>- <strong>Accéder aux variables de la BD :</strong></p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r source_style"><code class="sourceCode r"><a class="sourceLine" id="cb8-1" title="1">data_int_dep<span class="op">$</span>Pays</a>
+<a class="sourceLine" id="cb8-2" title="2"></a>
+<a class="sourceLine" id="cb8-3" title="3">data_int_dep<span class="op">$</span>Classe_âge</a>
+<a class="sourceLine" id="cb8-4" title="4"></a>
+<a class="sourceLine" id="cb8-5" title="5">data_int_dep<span class="op">$</span>Sexe</a>
+<a class="sourceLine" id="cb8-6" title="6"></a>
+<a class="sourceLine" id="cb8-7" title="7">data_int_dep<span class="op">$</span>Quintile_revenu</a>
+<a class="sourceLine" id="cb8-8" title="8"></a>
+<a class="sourceLine" id="cb8-9" title="9">data_int_dep<span class="op">$</span>Classe_intensité</a>
+<a class="sourceLine" id="cb8-10" title="10"></a>
+<a class="sourceLine" id="cb8-11" title="11">data_int_dep<span class="op">$</span>Pourcentage</a></code></pre></div>
+</section>
+<section id="manipulation-des-données-2" class="slide level2">
+<h2>Manipulation des données</h2>
+<p>- <strong>Tri à plat (variables qualitatives) :</strong></p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r source_style"><code class="sourceCode r"><a class="sourceLine" id="cb9-1" title="1"><span class="kw">table</span>(data_int_dep<span class="op">$</span>Pays)</a></code></pre></div>
+<pre><code>## 
+## Allemagne    France 
+##       250       250</code></pre>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r source_style"><code class="sourceCode r"><a class="sourceLine" id="cb11-1" title="1"><span class="kw">table</span>(data_int_dep<span class="op">$</span>Classe_âge)</a></code></pre></div>
+<pre><code>## 
+## De 15 à 24 ans De 25 à 34 ans De 35 à 44 ans De 45 à 54 ans De 55 à 64 ans 
+##            100            100            100            100            100</code></pre>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r source_style"><code class="sourceCode r"><a class="sourceLine" id="cb13-1" title="1"><span class="kw">table</span>(data_int_dep<span class="op">$</span>Sexe)</a></code></pre></div>
+<pre><code>## 
+##   F   H 
+## 250 250</code></pre>
+</section>
+<section id="manipulation-des-données-3" class="slide level2">
+<h2>Manipulation des données</h2>
+<p>- <strong>Tri à plat (variables qualitatives) :</strong></p>
+<div class="sourceCode" id="cb15"><pre class="sourceCode r source_style"><code class="sourceCode r"><a class="sourceLine" id="cb15-1" title="1"><span class="kw">table</span>(data_int_dep<span class="op">$</span>Quintile_revenu)</a></code></pre></div>
+<pre><code>## 
+##  1er_quintile 2eme_quintile 3eme_quintile 4eme_quintile 5eme_quintile 
+##           100           100           100           100           100</code></pre>
+<div class="sourceCode" id="cb17"><pre class="sourceCode r source_style"><code class="sourceCode r"><a class="sourceLine" id="cb17-1" title="1"><span class="kw">table</span>(data_int_dep<span class="op">$</span>Classe_intensité)</a></code></pre></div>
+<pre><code>## 
+##  Aucun ou minimum            Faible             Grave            Modéré 
+##               100               100               100               100 
+## Moyennement grave 
+##               100</code></pre>
+</section>
+<section id="manipulation-des-données-avec-dplyr" class="slide level2">
+<h2>Manipulation des données avec <code>dplyr</code></h2>
+<p>Les verbes de dplyr :</p>
+<p>- <code>slice()</code> : pour sélectionner des lignes du tableau selon leur position</p>
+<p>- <code>filter()</code> : pour sélectionner des lignes du tableau selon une condition</p>
+<p>- <code>select()</code> : pour sélectionner des colonnes d’un tableau, et <code>rename()</code> : pour renommer des colonnes</p>
+<p>- <code>arrange()</code> : pour réordonner les lignes d’un tableu selon une ou plusieurs colonnes</p>
+<p>- <code>mutate()</code> : pour créer de nouvelles colonnes dans le tableau de données</p>
+</section>
+<section id="manipulation-des-données-avec-dplyr-1" class="slide level2">
+<h2>Manipulation des données avec <code>dplyr</code></h2>
+<p>- <strong>Sélectionner les données de la France :</strong></p>
+<div class="sourceCode" id="cb19"><pre class="sourceCode r source_style"><code class="sourceCode r"><a class="sourceLine" id="cb19-1" title="1">data_int_dep_Fr &lt;-<span class="st"> </span>data_int_dep <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">filter</span>(Pays <span class="op">==</span><span class="st"> &quot;France&quot;</span>)</a>
+<a class="sourceLine" id="cb19-2" title="2">data_int_dep_Fr</a></code></pre></div>
+<pre><code>## # A tibble: 250 x 6
+##    Pays   Classe_âge     Sexe  Quintile_revenu Classe_intensité  Pourcentage
+##    &lt;chr&gt;  &lt;chr&gt;          &lt;chr&gt; &lt;chr&gt;           &lt;chr&gt;                   &lt;dbl&gt;
+##  1 France De 15 à 24 ans F     1er_quintile    Aucun ou minimum         50.2
+##  2 France De 15 à 24 ans F     1er_quintile    Faible                   35  
+##  3 France De 15 à 24 ans F     1er_quintile    Grave                     0.5
+##  4 France De 15 à 24 ans F     1er_quintile    Modéré                   11.8
+##  5 France De 15 à 24 ans F     1er_quintile    Moyennement grave         2.5
+##  6 France De 15 à 24 ans H     1er_quintile    Aucun ou minimum         67.7
+##  7 France De 15 à 24 ans H     1er_quintile    Faible                   24.4
+##  8 France De 15 à 24 ans H     1er_quintile    Grave                     0.3
+##  9 France De 15 à 24 ans H     1er_quintile    Modéré                    6.1
+## 10 France De 15 à 24 ans H     1er_quintile    Moyennement grave         1.5
+## # ... with 240 more rows</code></pre>
+</section>
+<section id="manipulation-des-données-avec-dplyr-2" class="slide level2">
+<h2>Manipulation des données avec <code>dplyr</code></h2>
+<p>- <strong>Sélectionner les données de la France pour la classe d’âge de 25 à 34 ans :</strong></p>
+<div class="sourceCode" id="cb21"><pre class="sourceCode r source_style"><code class="sourceCode r"><a class="sourceLine" id="cb21-1" title="1">data_int_dep_Fr_<span class="dv">34</span> &lt;-<span class="st"> </span>data_int_dep <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">filter</span>(Pays <span class="op">==</span><span class="st"> &quot;France&quot;</span> <span class="op">&amp;</span><span class="st"> </span>Classe_âge <span class="op">==</span><span class="st"> &quot;De 25 à 34 ans&quot;</span>)</a>
+<a class="sourceLine" id="cb21-2" title="2">data_int_dep_Fr_<span class="dv">34</span></a></code></pre></div>
+<pre><code>## # A tibble: 50 x 6
+##    Pays   Classe_âge     Sexe  Quintile_revenu Classe_intensité  Pourcentage
+##    &lt;chr&gt;  &lt;chr&gt;          &lt;chr&gt; &lt;chr&gt;           &lt;chr&gt;                   &lt;dbl&gt;
+##  1 France De 25 à 34 ans F     1er_quintile    Aucun ou minimum         57.2
+##  2 France De 25 à 34 ans F     1er_quintile    Faible                   22  
+##  3 France De 25 à 34 ans F     1er_quintile    Grave                     1  
+##  4 France De 25 à 34 ans F     1er_quintile    Modéré                   17.1
+##  5 France De 25 à 34 ans F     1er_quintile    Moyennement grave         2.7
+##  6 France De 25 à 34 ans H     1er_quintile    Aucun ou minimum         59.3
+##  7 France De 25 à 34 ans H     1er_quintile    Faible                   31.1
+##  8 France De 25 à 34 ans H     1er_quintile    Grave                     0  
+##  9 France De 25 à 34 ans H     1er_quintile    Modéré                    8  
+## 10 France De 25 à 34 ans H     1er_quintile    Moyennement grave         1.6
+## # ... with 40 more rows</code></pre>
+</section>
+<section id="enchaîner-les-opérations-avec" class="slide level2">
+<h2>Enchaîner les opérations avec <code>%&gt;%</code></h2>
+<p>- <strong>Extraire les données de la France pour la classe d’âge de 25 à 34 ans avec <code>filter</code>, sélectionner les colonnes “Classe_âge” et “Pourcentage” avec <code>select</code> puis trier selon la variable “Pourcentage” avec <code>arrange</code> :</strong></p>
+<div class="sourceCode" id="cb23"><pre class="sourceCode r source_style"><code class="sourceCode r"><a class="sourceLine" id="cb23-1" title="1">data_int_dep <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb23-2" title="2"><span class="st">  </span><span class="kw">filter</span>(Pays <span class="op">==</span><span class="st"> &quot;France&quot;</span> <span class="op">&amp;</span><span class="st"> </span>Classe_âge <span class="op">==</span><span class="st"> &quot;De 25 à 34 ans&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb23-3" title="3"><span class="st">  </span><span class="kw">select</span>(Classe_âge, Pourcentage) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb23-4" title="4"><span class="st">  </span><span class="kw">arrange</span>(Pourcentage)</a></code></pre></div>
+<pre><code>## # A tibble: 50 x 2
+##    Classe_âge     Pourcentage
+##    &lt;chr&gt;                &lt;dbl&gt;
+##  1 De 25 à 34 ans         0  
+##  2 De 25 à 34 ans         0  
+##  3 De 25 à 34 ans         0  
+##  4 De 25 à 34 ans         0  
+##  5 De 25 à 34 ans         0  
+##  6 De 25 à 34 ans         0  
+##  7 De 25 à 34 ans         0.3
+##  8 De 25 à 34 ans         0.4
+##  9 De 25 à 34 ans         0.6
+## 10 De 25 à 34 ans         0.7
+## # ... with 40 more rows</code></pre>
+</section>
+<section id="opérations-groupées" class="slide level2">
+<h2>Opérations groupées</h2>
+<p>- <code>group_by()</code> : permet de définir des groupes de lignes à partir des valeur d’une ou plusieurs colonnes</p>
+<p>- <code>summarise()</code> : permet d’agréger les lignes du tableau en effectuant une opération “résumée” sur une ou plusieurs colonnes</p>
+<p>- <code>count()</code> : pour compter le nombre de lignes par groupe</p>
+</section>
+<section id="opérations-groupées-1" class="slide level2">
+<h2>Opérations groupées</h2>
+<p>- <strong>Exemple : Calculer le pourcentage moyen par classe d’intensité</strong></p>
+<div class="sourceCode" id="cb25"><pre class="sourceCode r source_style"><code class="sourceCode r"><a class="sourceLine" id="cb25-1" title="1">data_int_dep_Fr <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb25-2" title="2"><span class="st">  </span><span class="kw">group_by</span>(Classe_intensité) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb25-3" title="3"><span class="st">  </span><span class="kw">summarise</span>(<span class="dt">Moyenne =</span> <span class="kw">mean</span>(Pourcentage))</a></code></pre></div>
+<pre><code>## # A tibble: 5 x 2
+##   Classe_intensité  Moyenne
+##   &lt;chr&gt;               &lt;dbl&gt;
+## 1 Aucun ou minimum   66.3  
+## 2 Faible             24.2  
+## 3 Grave               0.548
+## 4 Modéré              6.92 
+## 5 Moyennement grave   2.08</code></pre>
+</section>
+<section id="opérations-groupées-2" class="slide level2">
+<h2>Opérations groupées</h2>
+<p>- <strong>Exemple : Calculer le pourcentage moyen par classe d’intensité et par classe d’âge</strong></p>
+<div class="sourceCode" id="cb27"><pre class="sourceCode r source_style"><code class="sourceCode r"><a class="sourceLine" id="cb27-1" title="1">data_int_dep_Fr <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb27-2" title="2"><span class="st">  </span><span class="kw">group_by</span>(Classe_intensité, Classe_âge) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb27-3" title="3"><span class="st">  </span><span class="kw">summarise</span>(<span class="dt">Moyenne =</span> <span class="kw">mean</span>(Pourcentage))</a></code></pre></div>
+<div style="border: 1px solid #ddd; padding: 0px; overflow-y: scroll; height:200px; overflow-x: scroll; width:500px; ">
+<table class="table table-striped lightable-paper" style='font-size: 10px; width: auto !important; margin-left: auto; margin-right: auto; font-family: "Arial Narrow", arial, helvetica, sans-serif; margin-left: auto; margin-right: auto;'>
+<thead>
+<tr>
+<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">
+Classe_intensité
+</th>
+<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">
+Classe_âge
+</th>
+<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;">
+Moyenne
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+Aucun ou minimum
+</td>
+<td style="text-align:left;">
+De 15 à 24 ans
+</td>
+<td style="text-align:right;">
+61.84
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Aucun ou minimum
+</td>
+<td style="text-align:left;">
+De 25 à 34 ans
+</td>
+<td style="text-align:right;">
+63.84
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Aucun ou minimum
+</td>
+<td style="text-align:left;">
+De 35 à 44 ans
+</td>
+<td style="text-align:right;">
+69.44
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Aucun ou minimum
+</td>
+<td style="text-align:left;">
+De 45 à 54 ans
+</td>
+<td style="text-align:right;">
+66.93
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Aucun ou minimum
+</td>
+<td style="text-align:left;">
+De 55 à 64 ans
+</td>
+<td style="text-align:right;">
+69.36
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Faible
+</td>
+<td style="text-align:left;">
+De 15 à 24 ans
+</td>
+<td style="text-align:right;">
+28.73
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Faible
+</td>
+<td style="text-align:left;">
+De 25 à 34 ans
+</td>
+<td style="text-align:right;">
+25.78
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Faible
+</td>
+<td style="text-align:left;">
+De 35 à 44 ans
+</td>
+<td style="text-align:right;">
+22.60
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Faible
+</td>
+<td style="text-align:left;">
+De 45 à 54 ans
+</td>
+<td style="text-align:right;">
+22.80
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Faible
+</td>
+<td style="text-align:left;">
+De 55 à 64 ans
+</td>
+<td style="text-align:right;">
+20.98
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Grave
+</td>
+<td style="text-align:left;">
+De 15 à 24 ans
+</td>
+<td style="text-align:right;">
+0.15
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Grave
+</td>
+<td style="text-align:left;">
+De 25 à 34 ans
+</td>
+<td style="text-align:right;">
+0.65
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Grave
+</td>
+<td style="text-align:left;">
+De 35 à 44 ans
+</td>
+<td style="text-align:right;">
+0.67
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Grave
+</td>
+<td style="text-align:left;">
+De 45 à 54 ans
+</td>
+<td style="text-align:right;">
+0.67
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Grave
+</td>
+<td style="text-align:left;">
+De 55 à 64 ans
+</td>
+<td style="text-align:right;">
+0.60
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Modéré
+</td>
+<td style="text-align:left;">
+De 15 à 24 ans
+</td>
+<td style="text-align:right;">
+7.46
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Modéré
+</td>
+<td style="text-align:left;">
+De 25 à 34 ans
+</td>
+<td style="text-align:right;">
+8.35
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Modéré
+</td>
+<td style="text-align:left;">
+De 35 à 44 ans
+</td>
+<td style="text-align:right;">
+5.24
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Modéré
+</td>
+<td style="text-align:left;">
+De 45 à 54 ans
+</td>
+<td style="text-align:right;">
+7.30
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Modéré
+</td>
+<td style="text-align:left;">
+De 55 à 64 ans
+</td>
+<td style="text-align:right;">
+6.23
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Moyennement grave
+</td>
+<td style="text-align:left;">
+De 15 à 24 ans
+</td>
+<td style="text-align:right;">
+1.82
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Moyennement grave
+</td>
+<td style="text-align:left;">
+De 25 à 34 ans
+</td>
+<td style="text-align:right;">
+1.38
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Moyennement grave
+</td>
+<td style="text-align:left;">
+De 35 à 44 ans
+</td>
+<td style="text-align:right;">
+2.05
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Moyennement grave
+</td>
+<td style="text-align:left;">
+De 45 à 54 ans
+</td>
+<td style="text-align:right;">
+2.30
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Moyennement grave
+</td>
+<td style="text-align:left;">
+De 55 à 64 ans
+</td>
+<td style="text-align:right;">
+2.83
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="visualiser-avec-ggplot2" class="slide level2">
+<h2>Visualiser avec <code>ggplot2</code></h2>
+<p>- Un graphique <code>ggplot2</code> s’initialise à l’aide de la fonction <code>ggplot()</code>, qui prend en argument la tableau des données :</p>
+<div class="sourceCode" id="cb28"><pre class="sourceCode r source_style"><code class="sourceCode r"><a class="sourceLine" id="cb28-1" title="1"><span class="kw">ggplot</span>(<span class="dt">data =</span> data_int_dep_Fr)</a></code></pre></div>
+<p>- les éléments de représentation graphique sont appelés des <code>geom</code>, et on les ajoute à l’objet graphique de base avec l’opérateur <code>+</code> :</p>
+<div class="sourceCode" id="cb29"><pre class="sourceCode r source_style"><code class="sourceCode r"><a class="sourceLine" id="cb29-1" title="1"><span class="kw">ggplot</span>(<span class="dt">data =</span> data_int_dep_Fr) <span class="op">+</span><span class="st"> </span><span class="kw">geom_histogram</span>()</a></code></pre></div>
+</section>
+<section id="visualiser-avec-ggplot2-1" class="slide level2">
+<h2>Visualiser avec <code>ggplot2</code></h2>
+<p>- Reste à indiquer quelle donnée nous voulons représenter sous forme d’histogramme. Cela se fait à l’aide d’arguments passés via la fonction <code>aes()</code> :</p>
+<div class="sourceCode" id="cb30"><pre class="sourceCode r source_style"><code class="sourceCode r"><a class="sourceLine" id="cb30-1" title="1"><span class="kw">ggplot</span>(<span class="dt">data =</span> data_int_dep_Fr) <span class="op">+</span><span class="st"> </span><span class="kw">geom_histogram</span>(<span class="kw">aes</span>(<span class="dt">x =</span> Pourcentage))</a></code></pre></div>
+<p><img src="3_Démarche_Globale_Analyse_files/figure-revealjs/data_visual3-1.png" width="480" /></p>
+</section>
+<section id="visualiser-avec-ggplot2-2" class="slide level2">
+<h2>Visualiser avec <code>ggplot2</code></h2>
+<p>- il existe un grand nombre de geom, décrits en détail dans la <a href="https://ggplot2.tidyverse.org/reference/index.html">documentation officielle</a></p>
+<p><img src="img/ggplot2_ref.PNG" class="center"></p>
+</section>
+<section id="visualiser-avec-ggplot2-3" class="slide level2">
+<h2>Visualiser avec <code>ggplot2</code></h2>
+<p>- <strong>Tracer un diagramme en bâton pour le pourcentage de chaque classe d’intensité chez les femmes âgée de 45 à 54 ans dans le 5ème quintile de revenu.</strong></p>
+<div class="sourceCode" id="cb31"><pre class="sourceCode r source_style"><code class="sourceCode r"><a class="sourceLine" id="cb31-1" title="1"><span class="co">## Préparation des données </span></a>
+<a class="sourceLine" id="cb31-2" title="2">data_plot &lt;-<span class="st"> </span>data_int_dep_Fr <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">filter</span>(Classe_âge <span class="op">==</span><span class="st"> &quot;De 45 à 54 ans&quot;</span> <span class="op">&amp;</span><span class="st"> </span>Sexe <span class="op">==</span><span class="st"> &quot;F&quot;</span> <span class="op">&amp;</span><span class="st"> </span>Quintile_revenu <span class="op">==</span><span class="st"> &quot;5eme_quintile&quot;</span>)</a>
+<a class="sourceLine" id="cb31-3" title="3"></a>
+<a class="sourceLine" id="cb31-4" title="4"><span class="co">## Plot</span></a>
+<a class="sourceLine" id="cb31-5" title="5"><span class="kw">ggplot</span>(<span class="dt">data =</span> data_plot) <span class="op">+</span><span class="st"> </span><span class="kw">geom_bar</span>(<span class="kw">aes</span>(<span class="dt">x =</span> Classe_intensité, <span class="dt">y =</span> Pourcentage), <span class="dt">stat =</span> <span class="st">&quot;identity&quot;</span>)</a></code></pre></div>
+<p><img src="3_Démarche_Globale_Analyse_files/figure-revealjs/data_visual4-1.png" width="384" /></p>
+</section>
+<section id="visualiser-avec-ggplot2-4" class="slide level2">
+<h2>Visualiser avec <code>ggplot2</code></h2>
+<p>- <strong>Représenter des boîtes à moustaches pour les classes d’âges chez la population représentant des intensités sévères.</strong></p>
+<div class="sourceCode" id="cb32"><pre class="sourceCode r source_style"><code class="sourceCode r"><a class="sourceLine" id="cb32-1" title="1"><span class="co">## Préparation des données </span></a>
+<a class="sourceLine" id="cb32-2" title="2">data_plot &lt;-<span class="st"> </span>data_int_dep_Fr <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">filter</span>(Classe_intensité <span class="op">==</span><span class="st"> &quot;Grave&quot;</span>)</a>
+<a class="sourceLine" id="cb32-3" title="3"></a>
+<a class="sourceLine" id="cb32-4" title="4"><span class="co">## Plot</span></a>
+<a class="sourceLine" id="cb32-5" title="5"><span class="kw">ggplot</span>(<span class="dt">data =</span> data_plot) <span class="op">+</span><span class="st"> </span><span class="kw">geom_boxplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> Classe_âge, <span class="dt">y =</span> Pourcentage), <span class="dt">fill =</span> <span class="st">&quot;steelblue&quot;</span>)</a></code></pre></div>
+<p><img src="3_Démarche_Globale_Analyse_files/figure-revealjs/data_visual5-1.png" width="576" /></p>
+</section>
+<section id="visualiser-avec-ggplot2-5" class="slide level2">
+<h2>Visualiser avec <code>ggplot2</code></h2>
+<p><strong>Faceting</strong></p>
+<p>Le <em>faceting</em> permet d’effectuer plusieurs fois le même graphique selon les valeurs d’une ou plusieurs variables qualitatives :</p>
+<div class="sourceCode" id="cb33"><pre class="sourceCode r source_style"><code class="sourceCode r"><a class="sourceLine" id="cb33-1" title="1"><span class="kw">ggplot</span>(<span class="dt">data =</span> data_plot) <span class="op">+</span></a>
+<a class="sourceLine" id="cb33-2" title="2"><span class="st">  </span><span class="kw">geom_boxplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> Classe_âge, <span class="dt">y =</span> Pourcentage)) <span class="op">+</span></a>
+<a class="sourceLine" id="cb33-3" title="3"><span class="st">  </span><span class="kw">facet_wrap</span>(<span class="kw">vars</span>(Sexe))</a></code></pre></div>
+<p><img src="3_Démarche_Globale_Analyse_files/figure-revealjs/data_visual6-1.png" width="768" /></p>
+</section>
+<section id="ème-tutoriel-analyse-statistique-complète" class="title-slide slide level1"><h1>2ème tutoriel : Analyse statistique complète !</h1><p>Module 1 bis (7 décembre 2021) : <a href="./Tutoriels/2_data_analysis.html">Accéder au tutoriel</a></p></section>
+
+  <!--
+  To hide progress bar from entire presentation
+  just remove “progress” element.
+  -->
+  <!-- <div class="progress"></div> -->
+  <script src="3_Démarche_Globale_Analyse_files\rmdshower/node_modules/shower/node_modules/shower-core/shower.min.js"></script>
+  <!-- Copyright © 2015 Yours Truly, Famous Inc. -->
+  <!-- Photos by John Carey, fiftyfootshadows.net -->
+
+    <script>renderMathInElement(document.body);</script>
+  
+  
+</body>
+</html>

@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Le Rarkdown</title>
+  <meta charset="utf-8">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="2_Présentation_RMarkdown_files/shower-ribbon/package/styles/screen-4x3.css">
+  <link rel="stylesheet" href="2_Présentation_RMarkdown_files\rmdshower/style-common.css">
+  <link rel="stylesheet" href="2_Présentation_RMarkdown_files\rmdshower/style-ribbon.css">
+  <link rel="stylesheet" href="2_Présentation_RMarkdown_files/shower-ribbon/style-override.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.5.1/katex.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.5.1/katex.min.js"></script>
+  <script src="2_Présentation_RMarkdown_files\rmdshower/auto-render.min.js" type="text/javascript"></script>
+  
+  
+  
+  
+  
+</head>
+
+<body class="shower list">
+
+  <header class="caption">
+    <h1>Le Rarkdown</h1>
+    <p>A. Zaher</p>
+  </header>
+
+  
+  
+<section class="slide level2">
+
+<style type="text/css">
+.source_style {
+  max-width: 300px;
+  background-color: #5cb85c;
+}
+
+.output_style {
+  max-width: 500px;
+  background-color: #5cb85c;
+}
+
+figure{
+    display:inline-block;
+}
+
+.center {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 50%;
+}
+
+</style>
+<style type="text/css">
+
+body{ /* Normal  */
+      font-size: 12px;
+  }
+td {  /* Table  */
+  font-size: 12px;
+}
+h1 { /* Header 1 */
+  font-size: 70px;
+  font-weight: bold;
+  color: #908789;
+}
+code.r{ /* Code block */
+    font-size: 20px;
+}
+pre { /* Code block - determines code spacing between lines */
+    font-size: 18px;
+}
+</style>
+</section>
+<section id="diffuser-et-publier-avec-rmarkdown" class="slide level2">
+<h2>Diffuser et publier avec RMarkdown</h2>
+<div class="double">
+<p class="double-flow">
+<p><font size="5"> - <code>rmarkdown</code> permet de générer des des documents de manière dynamique en mélangeant texte mis en forme et résultats produits par du code R;<br />
+- Les documents générés peuvent être au format HTML, PDF, Word, et bien d’autres;<br />
+</p>
+</font>
+</p>
+<p class="double-flow">
+<img src="img/rmarkdown.png" class="one-col-img">
+</p>
+</div>
+</section>
+<section id="exemple-de-document-rmarkdown-minimal" class="slide level2">
+<h2>Exemple de document RMarkdown “minimal”</h2>
+<p><img src="img/Ex_rmarkdown.PNG" class="one-col-img" style="width: 800px; height: 500px;"></p>
+</section>
+<section id="rendu-du-document" class="slide level2">
+<h2>Rendu du document</h2>
+<figure role="group">
+<figure>
+<img src="img/rmd_html.png" style="width: 270px; height: 400px;">
+<figcaption>
+Rendu html
+</figcaption>
+</figure>
+<figure>
+<img src="img/rmd_pdf.png" style="width: 270px; height: 400px;">
+<figcaption>
+Rendu pdf
+</figcaption>
+</figure>
+<figure>
+<img src="img/rmd_word.png" style="width: 270px; height: 400px;">
+<figcaption>
+Rendu docx
+</figcaption>
+</figure>
+</figure>
+</section>
+<section id="créer-un-nouveau-document" class="slide level2">
+<h2>Créer un nouveau document</h2>
+<p>- Un document R Markdown est un simple fichier texte enregistré avec l’extension <code>.Rmd</code>.</p>
+<p>- Pour créer un nouveau document : <code>File -&gt; New File -&gt; R Markdown</code></p>
+<p><img src="img/New_rmd.PNG" class="center" style="width: 350px; height: 300px;"></p>
+</section>
+<section id="eléments-dun-rmarkdown" class="slide level2">
+<h2>Eléments d’un RMarkdown</h2>
+<p><strong>1- En-tête</strong></p>
+<pre><code>---
+title : &quot;Titre&quot;
+author : &quot;Prénom NOM&quot;
+date : &quot;06 décembre 2021&quot;
+output : html_document
+---</code></pre>
+<p><strong>2- Texte du document</strong></p>
+<p>Le corps du document est constitué de texte qui suit la syntaxe <em>Markdown</em> :</p>
+</section>
+<section id="eléments-dun-rmarkdown-1" class="slide level2">
+<h2>Eléments d’un RMarkdown</h2>
+<pre><code>Un exemple du texte avec *de l&#39;italique* et **du gras**,
+
+des listes à puces :
+
+- 1er élément
+- 2ème élément
+
+des niveaux de titres
+
+# Titre de niveau 1
+
+## Titre de niveau 2
+
+### Titre de niveau 3
+</code></pre>
+<p>Cet exemple génèrera le texte mis en forme suivant :</p>
+<p><img src="img/Ex_bloc_texte.PNG" style="width: 600px; height: 200px;"></p>
+</section>
+<section id="eléments-dun-rmarkdown-2" class="slide level2">
+<h2>Eléments d’un RMarkdown</h2>
+<p><strong>3- Blocs de code R</strong></p>
+<p>- Le code R est inclus dans des blocs (<em>Chunks</em>) délimités par la syntaxe suivante :</p>
+<pre><code>\```{r}
+ x &lt;- 5
+
+\```
+</code></pre>
+<p>- Pour insérer un bloc de code <code>Ctrl+Alt+i</code> ou utiliser le menu <em>Insert</em> :</p>
+<p><img src="img/insert_chunk.png" class="center" style="width: 90px; height: 200px;"></p>
+</section>
+<section id="compiler-un-document-knit" class="slide level2">
+<h2>Compiler un document (<em>Knit</em>)</h2>
+<p>- Pour compiler un document R Markdown (ou plutôt “tricoter”), il suffit de cliquer sur le bouton <em>Knit</em> :</p>
+<p><img src="img/knit_menu.png" class="center" style="width: 300px; height: 200px;"></p>
+<p>- On peut aussi utiliser le raccourci <code>Ctrl+Maj+K</code>.</p>
+</section>
+<section id="ressources" class="slide level2">
+<h2>Ressources</h2>
+<p>- <a href="https://rmarkdown.rstudio.com/" class="uri">https://rmarkdown.rstudio.com/</a></p>
+<p>- <a href="file:///C:/Users/ZAHER%20Ahmed/Downloads/rmarkdown.pdf">R Markdown Cheat sheet</a></p>
+</section>
+
+  <!--
+  To hide progress bar from entire presentation
+  just remove “progress” element.
+  -->
+  <!-- <div class="progress"></div> -->
+  <script src="2_Présentation_RMarkdown_files\rmdshower/node_modules/shower/node_modules/shower-core/shower.min.js"></script>
+  <!-- Copyright © 2015 Yours Truly, Famous Inc. -->
+  <!-- Photos by John Carey, fiftyfootshadows.net -->
+
+    <script>renderMathInElement(document.body);</script>
+  
+  
+</body>
+</html>
