@@ -64,11 +64,11 @@ Ce document présente un guide pratique pour l'atelier sur le traitement et l'an
 
 ## Première démo : {-} 
 
-L'objectif de cette démonstration est d'illustrer l'un des des usages potentiels de R.
+L'objectif de cette démonstration est d'illustrer l'un des usages potentiels de R.
 
 Pour cela, veuillez renseigner svp le formulaire suivant qui demande des informations basiques sur les participants : https://forms.gle/dS3aX4jtHBMWvjjMA (__5 min__).
 
-On s'intéresse après à connecter ce formulaire simple de __Google Form__, ç-à-d récupérer ses données récoltées dans un tableur __Excel__ et les visualiser très simplement avec des petits modules de graphes ou cartes sur une page HTML construite automatiquement (__RMarkdown__).  
+On s'intéresse après à connecter ce formulaire simple de __Google Form__, ç-à-d récupérer ses données collectées dans un tableur __Excel__ et les visualiser très simplement avec des petits modules de graphes ou cartes sur une page HTML construite automatiquement (__RMarkdown__).  
 
 Il s'agit donc de créer [un code R](https://github.com/zaher-stat/Atelier-R-Semaine-DATA-SHS/blob/ZAHER_Ahmed/dashboard.Rmd) qui permet de visualiser en temps réel un tableau de bord (*dashboard*) qui présente les résultats. 
 
