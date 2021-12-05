@@ -25,7 +25,7 @@ knitr::opts_chunk$set(echo = TRUE)
 
 Dans ce tutoriel, on va travailler avec le jeu de données tiré de l'enquête __General Social Survey (GSS)__ sur le bonheur inclus dans l'extension `questionr`.
 
-_GSS est une enquête annuelle transversale sur les Américains, menée depuis 
+_GSS est une enquête annuelle transversale sur les Américains, menée depuis 1972_
 
 ## Chargement de données
 
@@ -117,7 +117,7 @@ d$niv_bonheur_fr <- ifelse(d$niv_bonheur == "very happy", "très heureux",
                                       )))
 
 ```
-**Exercices :**
+## Exercices :
 
 - Faites de même pour la variable "etat_matrimonial";
 
@@ -126,7 +126,7 @@ d$niv_bonheur_fr <- ifelse(d$niv_bonheur == "very happy", "très heureux",
 
 ## Sélectionner des observations
 
-On cherche ici à sélectionner un sous-échantillon de **3 500** sujets parmi les **51 000** qui sont présents dans la base de données.
+On cherche ici à sélectionner un sous-échantillon de **6 000** sujets parmi les **51 000** qui sont présents dans la base de données.
 
 Pour ce faire, on applique la fonction `sample_n()` du package `dplyr` qui permet de tirer aléatoirement des lignes de la base de données, sans remplacement (`replace = FALSE`) :
 
@@ -340,7 +340,7 @@ t.test(d$age ~ d$sexe)
 ```
 
 
-Le résultat du test n'est pas significatif, on ne rejette pas l'hypothèse nulle d'égalité des moyennes des âges entre les hommes et les femmes.
+Le résultat du test est significatif, on rejette l'hypothèse nulle d'égalité des moyennes des âges entre les hommes et les femmes.
 
 ==> Le test *t* s'applique à des distributions normales. On doit donc vérifier avant si la distribution des âges est normale !!
 
@@ -375,15 +375,15 @@ wilcox.test(d$age ~ d$sexe)
 
 ```
 
-la p-value est à nouveau supérieur au seuil de 5%, on ne rejette pas l'hypothèse d'égalité des moyennes d'âges entre les hommes et les femmes.
+la p-value est à nouveau inférieur au seuil de 5%, on rejette l'hypothèse d'égalité des moyennes d'âges entre les hommes et les femmes.
 
 
 
-**Exercices :**
+## Exercices :
 
 - Faire le boxplot qui croise l'âge avec le niveau de santé, et calculer l'âge moyen par catégorie de `niv_sante`.
-- 
--
+- Tester l'hypothèse d'égalité des âges moyens entre les catégories du niveau de santé.
+- Effectuez les mêmes analyses sur les autres variables : `niv_education`, `sit_financiere` et `etat_matrimonial.`
 
 
 # Modélisation
@@ -405,7 +405,7 @@ d$sit_financiere <- relevel(d$sit_financiere, ref = "average") ## la modalité c
 d$niv_sante <- relevel(d$niv_sante, ref = "fair") ## la modalité centrale comme réf
 
 # d_train & d_test
-index <- sample(1:6000, 3000)
+index <- sample(1:6000, 4000)
 d_train <- d[index,]
 d_test <- d[-index,]
 

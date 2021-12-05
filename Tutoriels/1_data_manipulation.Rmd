@@ -43,7 +43,7 @@ intensite_depressif
 
 ```{r , message=FALSE, warning=FALSE}
 
-str(intensite_depressif)
+## Ajouter le code ici
 
 ```
 
@@ -51,8 +51,7 @@ str(intensite_depressif)
 
 ```{r , message=FALSE, warning=FALSE}
 
-intensite_depressif$Classe_âge[1:50] ## les 50 premières valeurs
-
+## Ajouter le code ici
 ```
 
 
@@ -60,11 +59,8 @@ intensite_depressif$Classe_âge[1:50] ## les 50 premières valeurs
 
 ```{r , message=FALSE, warning=FALSE}
 
-table(intensite_depressif$Pays)
-table(intensite_depressif$Classe_âge)
-table(intensite_depressif$Sexe)
-table(intensite_depressif$Quintile_revenu)
-table(intensite_depressif$Classe_intensité)
+## Ajouter le code ici
+
 ```
 
 
@@ -74,8 +70,7 @@ table(intensite_depressif$Classe_intensité)
 
 ```{r , message=FALSE, warning=FALSE}
 
-intensite_depressif_Fr <- intensite_depressif %>% filter(Pays == "France")
-intensite_depressif_Fr
+## Ajouter le code ici
 
 ```
 
@@ -83,8 +78,7 @@ intensite_depressif_Fr
 
 ```{r , message=FALSE, warning=FALSE}
 
-intensite_depressif_Fr_34 <- intensite_depressif %>% filter(Pays == "France" & Classe_âge == "De 25 à 34 ans")
-intensite_depressif_Fr_34
+## Ajouter le code ici
 
 ```
 
@@ -96,10 +90,7 @@ intensite_depressif_Fr_34
 
 ```{r , message=FALSE, warning=FALSE}
 
-intensite_depressif %>% 
-  filter(Pays == "France" & Classe_âge == "De 25 à 34 ans") %>% 
-  select(Classe_âge, Pourcentage) %>% 
-  arrange(Pourcentage)
+## Ajouter le code ici
 
 ```
 
@@ -109,9 +100,7 @@ intensite_depressif %>%
 
 ```{r , message=FALSE, warning=FALSE}
 
-intensite_depressif_Fr %>% 
-  group_by(Classe_intensité) %>%
-  summarise(Moyenne = mean(Pourcentage))
+## Ajouter le code ici
 
 ```
 
@@ -119,9 +108,7 @@ intensite_depressif_Fr %>%
 
 ```{r , message=FALSE, warning=FALSE}
 
-intensite_depressif_Fr %>%
-  group_by(Classe_intensité, Classe_âge) %>%
-  summarise(Moyenne = mean(Pourcentage))
+## Ajouter le code ici
 
 ```
 
@@ -132,19 +119,14 @@ intensite_depressif_Fr %>%
 
 ```{r , message=FALSE, warning=FALSE}
 
-ggplot(data = intensite_depressif_Fr) + geom_histogram(aes(x = Pourcentage))
-
+## Ajouter le code ici
 ```
 
 **Diagramme en bâton pour le pourcentage de chaque classe d’intensité chez les femmes âgée de 45 à 54 ans dans le 5ème quintile de revenu**
 
 ```{r , message=FALSE, warning=FALSE}
 
-## Préparation des données 
-data_plot <- intensite_depressif_Fr %>% filter(Classe_âge == "De 45 à 54 ans" & Sexe == "F" & Quintile_revenu == "5eme_quintile")
-
-## Plot
-ggplot(data = data_plot) + geom_bar(aes(x = Classe_intensité, y = Pourcentage), stat = "identity")
+## Ajouter le code ici
 
 ```
 
@@ -152,11 +134,7 @@ ggplot(data = data_plot) + geom_bar(aes(x = Classe_intensité, y = Pourcentage),
 
 ```{r , message=FALSE, warning=FALSE}
 
-## Préparation des données 
-data_plot <- intensite_depressif_Fr %>% filter(Classe_intensité == "Grave")
-
-## Plot
-ggplot(data = data_plot) + geom_boxplot(aes(x = Classe_âge, y = Pourcentage), fill = "steelblue")
+## Ajouter le code ici
 
 ```
 
@@ -164,10 +142,6 @@ ggplot(data = data_plot) + geom_boxplot(aes(x = Classe_âge, y = Pourcentage), f
 
 
 ```{r , message=FALSE, warning=FALSE}
-
-ggplot(data = data_plot) +
-  geom_boxplot(aes(x = Classe_âge, y = Pourcentage)) +
-  facet_wrap(vars(Sexe))
-
+## Ajouter le code ici
 ```
 
