@@ -70,7 +70,7 @@ Pour cela, veuillez renseigner svp le formulaire suivant qui demande des informa
 
 On s'intéresse après à connecter ce formulaire simple de __Google Form__, ç-à-d récupérer ses données collectées dans un tableur __Excel__ et les visualiser très simplement avec des petits modules de graphes ou cartes sur une page HTML construite automatiquement (__RMarkdown__).  
 
-Il s'agit donc de créer [un code R](https://github.com/zaher-stat/Atelier-R-Semaine-DATA-SHS/blob/ZAHER_Ahmed/dashboard.Rmd) qui permet de visualiser en temps réel un tableau de bord (*dashboard*) qui présente les résultats. 
+Il s'agit donc de créer [un code R](https://github.com/zaher-stat/Atelier-R-Semaine-DATA-SHS/blob/ZAHER_Ahmed/dashboard/dashboard.Rmd) qui permet de visualiser en temps réel un tableau de bord (*dashboard*) qui présente les résultats. 
 
 ## 1ère partie : Présentation de R {-}
 
